@@ -45,10 +45,7 @@ export const ContextProvider = props => {
         rating: '',
         director: '',
         actors: [],
-        reviews: [{
-            author: '',
-            content: ''
-        }]
+        reviews: []
     });
     useEffect(() => {
         const getMoviedetail = async () => {
@@ -68,10 +65,9 @@ export const ContextProvider = props => {
                 }
                   for (let i = 0; i < 2; i++) {
                       if (response3.data.results.length !== 0) {
-                        let review = [{
-                            author: response3.data.results[i].author,
-                            content: response3.data.results[i].content
-                        }]
+                        let review = [
+                            response3.data.results[i].content
+                        ]
                         reviews.push(review);
                     }
                 }
