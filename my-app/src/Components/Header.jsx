@@ -9,8 +9,8 @@ const Header = () => {
                 <NavLink to="index.html" id="branding">
                     <img src="logo.png" alt="" className="logo"></img>
                     <div className="logo-copy">
-                        <h1 className="site-title">Company Name</h1>
-                        <small className="site-description">Tagline goes here</small>
+                        <h1 className="site-title">The Movie Place</h1>
+                        <small className="site-description">Tommy knows movies</small>
                     </div>
                 </NavLink>
 

@@ -39,7 +39,7 @@ const Movies = () => {
                             <div class="latest-movie">
                                 <ul>
                                     {value.movies.map(movie => {
-                                       return <li><img src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title}></img>{movie.overview}</li>
+                                       return <li><img src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title}></img>{movie.overview}<p /></li>
                                     })}
                                 </ul>
                             </div>
