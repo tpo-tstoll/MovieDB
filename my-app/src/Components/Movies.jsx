@@ -13,12 +13,12 @@ const Movies = () => {
             <div className="container">
                 <div className="page">
                     <div className="row">
-                        <div className="col-md-9">
+                        <div className="col-md-12">
 							<div className="slider">
 								<ul className="slides">
                                     {value.movies.map(movie => {
                                        return <li className='col-md-4' key={movie.id}><NavLink to={`/${movie.id}`}><img src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title}></img>
-                                       <h1 className='maintitle'>{movie.title}</h1></NavLink>
+                                       <h2 className='maintitle'>{movie.title}</h2></NavLink>
                                        {movie.overview}<p /></li>
                                     })}
                                 </ul>

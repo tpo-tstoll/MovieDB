@@ -20,7 +20,7 @@ export const ContextProvider = props => {
         let movieList = [];
         try {
            let response = await api.getMovies();
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 9; i++) {
                     let movie = {
                         id: response.data.results[i].id,
                         title: response.data.results[i].title,
@@ -71,7 +71,6 @@ export const ContextProvider = props => {
                         reviews.push(review);
                     }
                 }
-                console.log(response3);
                 let movieDetail = {
                     title: response1.data.title,
                     overview: response1.data.overview,
@@ -83,7 +82,6 @@ export const ContextProvider = props => {
                     reviews: reviews
                 };
                 await setMovieDetail(movieDetail);
-                console.log(path)
             } catch (error) {
                 console.log(error);
             }
