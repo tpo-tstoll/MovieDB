@@ -7,7 +7,7 @@ const Header = () => {
         <header className="site-header">
             <div className="container">
                 <NavLink to="index.html" id="branding">
-                    <img src="../images/logo.png" alt="" className="logo"></img>
+                    <img src="logo.png" alt="" className="logo"></img>
                     <div className="logo-copy">
                         <h1 className="site-title">Company Name</h1>
                         <small className="site-description">Tagline goes here</small>
