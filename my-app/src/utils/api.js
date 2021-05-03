@@ -1,10 +1,13 @@
 import axios from 'axios';
+require("dotenv").config();
 
+const apiKey = process.env.REACT_APP_API_KEY;
 
 export default {
 
     getMovies: async () => {
-        const response = await axios.get('https://api.themoviedb.org/3/movie/550?api_key=533e7be9234474900fca15570cfb9ae4');
+        console.log(apiKey)
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`);
         return response;
     }
 
