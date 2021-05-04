@@ -1,5 +1,6 @@
-import React, { useContext} from 'react';
+import React, { useContext, useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
+import api from '../utils/api';
 import Context from '../context';
 
 
@@ -9,7 +10,6 @@ const Movies = () => {
 	
 	let d = new Date();
 	const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-
 
     return (
         <main className="main-content">
@@ -32,22 +32,13 @@ const Movies = () => {
 								<h2 className="section-title">{months[d.getMonth()]} premiere</h2>
 								<p>Popular movies premiering in {months[d.getMonth()]}:</p>
 								<ul className="movie-schedule">
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
+									{console.log(value.upcoming)}
+									{value.upcoming.map(movie => {
+											return <li key={movie.id}>
+												<div className="date">{movie.release}</div>
+												<h2 className="entry-title"><NavLink to={movie.id}>{movie.title}</NavLink></h2>
+											</li>	
+									})}
 								</ul>
 							</div>
 							<div className="col-md-4">
