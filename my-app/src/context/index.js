@@ -5,9 +5,10 @@ import api from '../utils/api';
 const Context = React.createContext();
 
 export const ContextProvider = props => {
-
+    //locate path and store to variable
     let path = useLocation().pathname.substring(1)
 
+    //Create movies state to contain array of movies
     const [ movies, setMovies ] = useState([{
         id: '',
         title: '',
@@ -15,6 +16,7 @@ export const ContextProvider = props => {
         image: ''
     }])
 
+    //useEffect to get a list of movies, and set movies state
     useEffect(() => {
         const getMovieList = async () => {
         let movieList = [];
@@ -37,6 +39,7 @@ export const ContextProvider = props => {
     getMovieList();
     }, [])
 
+    //State that contains details on a specific movie
     const [movieDetail, setMovieDetail] = useState({
         title: '',
         overview: '',
@@ -48,6 +51,7 @@ export const ContextProvider = props => {
         reviews: []
     });
 
+    //Perform 3 API calls to get needed info, set state based upon responses
     useEffect(() => {
         const getMoviedetail = async () => {
             try {
@@ -57,13 +61,17 @@ export const ContextProvider = props => {
                 let response1 = await api.getMovieDetail(path);
                 let response2 = await api.getCast(path);
                 let response3 = await api.getReviews(path);
+                
+                //Loop through response, if director is returned, set director variable
                 for (let i = 0; i < response2.data.crew.length; i++) {
                     if (response2.data.crew[i].job === 'Director')
                     director = response2.data.crew[i].name
                 }
+                //Loop through actors and return first 5
                 for (let i = 0; i < 5; i++) {
                     actors.push(response2.data.cast[i].name)
                 }
+                //If reviews exist, return 2
                 for (let i = 0; i < 2; i++) {
                     if (response3.data.results.length !== 0) {
                     let review = [
@@ -72,6 +80,7 @@ export const ContextProvider = props => {
                     reviews.push(review);
                     }
                 }
+                //set movie detail object that is used to update state
                 let movieDetail = {
                     title: response1.data.title,
                     overview: response1.data.overview,
