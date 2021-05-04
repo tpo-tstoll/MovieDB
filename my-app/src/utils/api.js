@@ -3,6 +3,7 @@ require("dotenv").config();
 
 const apiKey = process.env.REACT_APP_API_KEY;
 
+// eslint-disable-next-line
 export default {
 
     getMovies: async () => {

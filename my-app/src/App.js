@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Switch, Route} from 'react-router-dom';
-import Context from './context';
 
 import Header from './Components/Header';
 import Footer from './Components/Footer'
@@ -10,7 +9,6 @@ import SearchResults from './Components/SearchResults';
 
 function App() {
 
-  const {value} = useContext(Context);
   
   return (
     <>

@@ -5,7 +5,10 @@ import Context from '../context';
 
 const Movies = () => {
 
-    const {value} = useContext(Context);
+	const {value} = useContext(Context);
+	
+	let d = new Date();
+	const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 
 
     return (
@@ -24,6 +27,74 @@ const Movies = () => {
                                 </ul>
                             </div>
                         </div>
+                        <div className="row">
+							<div className="col-md-4">
+								<h2 className="section-title">{months[d.getMonth()]} premiere</h2>
+								<p>Popular movies premiering in {months[d.getMonth()]}:</p>
+								<ul className="movie-schedule">
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+								</ul>
+							</div>
+							<div className="col-md-4">
+								<h2 className="section-title">{months[d.getMonth() + 1]} premiere</h2>
+								<p>Popular movies premiering in {months[d.getMonth() + 1]}:</p>
+								<ul className="movie-schedule">
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+								</ul>
+							</div>
+							<div className="col-md-4">
+								<h2 className="section-title">{months[d.getMonth() + 2]} premiere</h2>
+								<p>Popular movies premiering in {months[d.getMonth() + 2]}:</p>
+								<ul className="movie-schedule">
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+									<li>
+										<div className="date">16/12</div>
+										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
+									</li>
+								</ul>
+							</div>
+						</div>
                     </div>
                 </div>
             </div>

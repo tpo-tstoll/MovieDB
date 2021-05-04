@@ -67,7 +67,6 @@ export const ContextProvider = props => {
                 let director;
                 let reviews = [];
                 let response = await api.getMovieDetail(path);
-                console.log(path);
                  //Loop through response, if director is returned, set director variable
                 for (let i = 0; i < response.data.credits.crew.length; i++) {
                     if (response.data.credits.crew[i].job === 'Director')

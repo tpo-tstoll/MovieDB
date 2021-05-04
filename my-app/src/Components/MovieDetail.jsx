@@ -35,7 +35,7 @@ const MovieDetail = () => {
                                 </ul>
                                 <ul className="starring">
                                     <li><strong>Director:</strong> {value.movieDetail.director} </li>
-                                    <li><strong>Stars:</strong> {value.movieDetail.actors.map(actor => { return `${actor} | `})} </li>
+                                    <li><strong>Stars:</strong> {value.movieDetail.actors.map(actor => { return <>{actor} | </>})} </li>
                                 </ul>
                                 <hr />
                                 <div className="entry-content">
