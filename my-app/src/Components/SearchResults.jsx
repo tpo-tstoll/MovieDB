@@ -18,7 +18,7 @@ const SearchResults = () => {
                                 {value.searchResults.map(movie => {
                                    return <ul className="slides"> <li className='col-md-4' key={movie.id}><NavLink to={`/${movie.id}`}><img src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title}></img></NavLink></li>
                                    <li className="col-md-3 col-centered" top='50%'><NavLink to={`/${movie.id}`}><h1 className='maintitle'>{movie.title}</h1>
-                                   <p className='maintitle'><h3>Year: {movie.year.substring(0,4)}</h3></p></NavLink></li></ul>
+                                   <h3 className='maintitle'>Year: {movie.year.substring(0,4)}</h3></NavLink></li></ul>
                                 })}
                         </div>
                     </div>

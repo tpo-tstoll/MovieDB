@@ -38,11 +38,11 @@ const MovieDetail = () => {
                                     <li><strong>Stars:</strong> {value.movieDetail.actors.map(actor => { return `${actor} | `})} </li>
                                 </ul>
                                 <hr />
-                                <div class="entry-content">
+                                <div className="entry-content">
                                     <h3>Reviews:</h3>
                                     {value.movieDetail.reviews.length > 0 ? 
                                         value.movieDetail.reviews.map(review => {
-                                            return <><p>- {review}</p></>
+                                            return <><p key={review}>- {review}</p></>
                                         })
                                         :
                                         <h3>Sorry No Reviews Exist For This Film!</h3>
