@@ -67,31 +67,35 @@ export const ContextProvider = props => {
                 let director;
                 let reviews = [];
                 let response = await api.getMovieDetail(path);
+                console.log(response);
+                console.log(response.data.credits.cast.length);
                  //Loop through response, if director is returned, set director variable
                 for (let i = 0; i < response.data.credits.crew.length; i++) {
                     if (response.data.credits.crew[i].job === 'Director')
                     director = response.data.credits.crew[i].name
                 }
                 //Loop through actors and return first 5
-                for (let i = 0; i < 5; i++) {
-                    actors.push(response.data.credits.cast[i].name)
+                if (response.data.credits.cast.length !== 0) {
+                    for (let i = 0; i < response.data.credits.cast.length && i < 5; i++) {
+                        actors.push(response.data.credits.cast[i].name)
+                    }
                 }
                 //If reviews exist, return 2
-                for (let i = 0; i < 2; i++) {
-                    if (response.data.reviews.results.length !== 0) {
-                    let review = [
-                        response.data.reviews.results[i].content
-                    ]
-                    reviews.push(review);
-                    }
+                if (response.data.reviews.results.length !== 0) {
+                    for (let i = 0; i < response.data.reviews.results.length && i < 2; i++) {
+                        let review = [
+                            response.data.reviews.results[i].content
+                        ]
+                        reviews.push(review);
+                        }
                 }
                 //set movie detail object that is used to update state
                 let movieDetail = {
-                    title: response.data.title,
-                    overview: response.data.overview,
-                    image: response.data.poster_path,
-                    runningTime: response.data.runtime,
-                    rating: response.data.vote_average,
+                    title: response.data.title ? response.data.title : null,
+                    overview: response.data.overview ? response.data.overview : null,
+                    image: response.data.poster_path ? response.data.poster_path : null,
+                    runningTime: response.data.runtime ? response.data.runtime : null,
+                    rating: response.data.vote_average ? response.data.vote_average : null,
                     director: director,
                     actors: actors,
                     reviews: reviews

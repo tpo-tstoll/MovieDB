@@ -1708,3 +1708,11 @@ ul.arrow {
   text-align: center;
   color: black;
  }
+
+ .col-centered{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 550px;
+  border: none
+}
