@@ -20,7 +20,7 @@ export const ContextProvider = props => {
         let movieList = [];
         try {
            let response = await api.getMovies();
-            for (let i = 0; i < 9; i++) {
+            for (let i = 0; i < 6; i++) {
                     let movie = {
                         id: response.data.results[i].id,
                         title: response.data.results[i].title,
@@ -47,6 +47,7 @@ export const ContextProvider = props => {
         actors: [],
         reviews: []
     });
+
     useEffect(() => {
         const getMoviedetail = async () => {
             try {
@@ -63,12 +64,12 @@ export const ContextProvider = props => {
                 for (let i = 0; i < 5; i++) {
                     actors.push(response2.data.cast[i].name)
                 }
-                  for (let i = 0; i < 2; i++) {
-                      if (response3.data.results.length !== 0) {
-                        let review = [
-                            response3.data.results[i].content
-                        ]
-                        reviews.push(review);
+                for (let i = 0; i < 2; i++) {
+                    if (response3.data.results.length !== 0) {
+                    let review = [
+                        response3.data.results[i].content
+                    ]
+                    reviews.push(review);
                     }
                 }
                 let movieDetail = {
