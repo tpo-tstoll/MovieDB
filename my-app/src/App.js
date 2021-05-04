@@ -14,7 +14,6 @@ function App() {
   return (
     <>
       <Header />
-  
       <Switch>
         <Route exact path='/' component={Movies} />
         <Route exact path={'/:id'} component={MovieDetail} />

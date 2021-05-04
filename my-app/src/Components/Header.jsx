@@ -23,11 +23,10 @@ const Header = () => {
                         <li className="menu-item"><NavLink to="joinus.html">Join us</NavLink></li>
                         <li className="menu-item"><NavLink to="contact.html">Contact</NavLink></li>
                     </ul>
-
                     <form action="#" className="search-form">
-                        <input type="text" placeholder="Search..."></input>
-                        <button><i className="fa fa-search"></i></button>
-                    </form>
+                        <input type="text" placeholder="Search..." />
+                        <button><i className="fa fa-search" /> Go</button>
+					</form>
                 </div>
 
                 <div className="mobile-navigation"></div>

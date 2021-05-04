@@ -1471,9 +1471,9 @@ ul.arrow {
     border-radius: 0;
     font-family: inherit;
     font-weight: 300;
-    width: 0;
-    visibility: hidden;
-    opacity: 0;
+    width: 200px;
+    visibility: visible;
+    opacity: 1;
     -webkit-transition: .3s ease;
             transition: .3s ease;
     padding: 10px 0; }
@@ -1483,9 +1483,8 @@ ul.arrow {
       opacity: 1;
       padding: 10px; }
   .main-navigation .search-form button {
-    background-color: transparent;
-    border: none;
-    border-left: 1px solid #eeeeef;
+    background-color: black;
+    border: 3px solid #ffaa3c;
     border-radius: 0;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
