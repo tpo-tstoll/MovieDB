@@ -16,7 +16,6 @@ const MovieDetail = () => {
                         <NavLink to='/'>Home</NavLink>
                         <span>{value.movieDetail.title}</span>
                     </div>
-
                     <div className="content">
                         <div className="row">
                             <div className="col-md-6">
@@ -29,7 +28,11 @@ const MovieDetail = () => {
                                 </div>
                                 <ul className="movie-meta">
                                     <li><strong>Rating:</strong> 
-                                        <span className="starring"><span><strong> {value.movieDetail.rating}</strong> out of 10</span></span>
+                                        {value.movieDetail.rating ? <span className="starring"><strong> {value.movieDetail.rating}</strong> out of 10</span> 
+                                        : 
+                                        <span className="starring"> Sorry! No Ratings Yet</span>
+                                        
+                                        }
                                     </li>
                                     <li><strong>Length:</strong> {value.movieDetail.runningTime}</li>
                                 </ul>

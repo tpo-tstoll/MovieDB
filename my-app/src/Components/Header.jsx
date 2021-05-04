@@ -25,6 +25,7 @@ const Header = () => {
         } 
         value.setSearchResults(resultArray);
         history.push(`/search/${searchInput.current.value}`)
+        searchInput.current.value = null;
     }
 
     return (

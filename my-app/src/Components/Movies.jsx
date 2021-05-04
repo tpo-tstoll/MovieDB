@@ -32,11 +32,10 @@ const Movies = () => {
 								<h2 className="section-title">{months[d.getMonth()]} premiere</h2>
 								<p>Popular movies premiering in {months[d.getMonth()]}:</p>
 								<ul className="movie-schedule">
-									{console.log(value.upcoming)}
-									{value.upcoming.map(movie => {
+									{value.upcoming.slice(0,4).map(movie => {
 											return <li key={movie.id}>
-												<div className="date">{movie.release}</div>
-												<h2 className="entry-title"><NavLink to={movie.id}>{movie.title}</NavLink></h2>
+												<div className="date">{movie.release.substring(5)}</div>
+												<h2 className="entry-title"><NavLink to={`/${movie.id}`}>{movie.title}</NavLink></h2>
 											</li>	
 									})}
 								</ul>
@@ -45,44 +44,24 @@ const Movies = () => {
 								<h2 className="section-title">{months[d.getMonth() + 1]} premiere</h2>
 								<p>Popular movies premiering in {months[d.getMonth() + 1]}:</p>
 								<ul className="movie-schedule">
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
+									{value.upcoming.slice(4,8).map(movie => {
+												return <li key={movie.id}>
+													<div className="date">{movie.release.substring(5)}</div>
+													<h2 className="entry-title"><NavLink to={`/${movie.id}`}>{movie.title}</NavLink></h2>
+												</li>	
+										})}
 								</ul>
 							</div>
 							<div className="col-md-4">
 								<h2 className="section-title">{months[d.getMonth() + 2]} premiere</h2>
 								<p>Popular movies premiering in {months[d.getMonth() + 2]}:</p>
 								<ul className="movie-schedule">
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
-									<li>
-										<div className="date">16/12</div>
-										<h2 className="entry-title"><NavLink to="#">Perspiciatis unde omnis</NavLink></h2>
-									</li>
+									{value.upcoming.slice(8,12).map(movie => {
+										return <li key={movie.id}>
+											<div className="date">{movie.release.substring(5)}</div>
+											<h2 className="entry-title"><NavLink to={`/${movie.id}`}>{movie.title}</NavLink></h2>
+										</li>	
+									})}
 								</ul>
 							</div>
 						</div>
