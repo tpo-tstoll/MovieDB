@@ -1,7 +1,31 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext, useRef } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
+import api from '../utils/api'
+import Context from "../context"
 
 const Header = () => {
+
+    const {value} = useContext(Context);
+
+    const searchInput = useRef('');
+    const history = useHistory();
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        let resultArray = [];
+        let response = await api.getSearchResults(searchInput.current.value);
+        for (let i = 0; i < response.data.results.length; i++ ) {
+            let results = {
+                id: response.data.results[i].id,
+                title: response.data.results[i].title,
+                year: response.data.results[i].release_date,
+                image: response.data.results[i].poster_path
+            }
+            resultArray.push(results)
+        } 
+        value.setSearchResults(resultArray);
+        history.push(`/search/${searchInput.current.value}`)
+    }
 
     return (
         <header className="site-header">
@@ -23,8 +47,8 @@ const Header = () => {
                         <li className="menu-item"><NavLink to="joinus.html">Join us</NavLink></li>
                         <li className="menu-item"><NavLink to="contact.html">Contact</NavLink></li>
                     </ul>
-                    <form action="#" className="search-form">
-                        <input type="text" placeholder="Search..." />
+                    <form action='/search' onSubmit={onSubmit} className="search-form">
+                        <input type="text" placeholder="Search..." ref={searchInput}/>
                         <button><i className="fa fa-search" /> Go</button>
 					</form>
                 </div>

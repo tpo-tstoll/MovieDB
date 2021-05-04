@@ -8,6 +8,14 @@ export const ContextProvider = props => {
     //locate path and store to variable
     let path = useLocation().pathname.substring(1)
 
+    //State for search resuts
+    const [ searchResults, setSearchResults ] = useState([{
+        id: '',
+        title: '',
+        year: '',
+        image: ''
+    }])
+
     //Create movies state to contain array of movies
     const [ movies, setMovies ] = useState([{
         id: '',
@@ -99,7 +107,9 @@ export const ContextProvider = props => {
 
     const value = {
         movies,
-        movieDetail
+        movieDetail,
+        searchResults,
+        setSearchResults
     }
 
     return (
