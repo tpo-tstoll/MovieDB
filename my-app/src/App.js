@@ -3,6 +3,7 @@ import { Switch, Route} from 'react-router-dom';
 import Context from './context';
 
 import Header from './Components/Header';
+import Footer from './Components/Footer'
 import Movies from './Components/Movies';
 import MovieDetail from './Components/MovieDetail'
 
@@ -13,10 +14,12 @@ function App() {
   return (
     <>
       <Header />
+  
       <Switch>
         <Route exact path='/' component={Movies} />
         <Route exact path={'/:id'} component={MovieDetail} />
       </Switch>
+      <Footer />
     </>
   );
 }

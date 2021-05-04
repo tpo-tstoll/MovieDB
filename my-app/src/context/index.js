@@ -22,7 +22,7 @@ export const ContextProvider = props => {
         let movieList = [];
         try {
            let response = await api.getMovies();
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 3; i++) {
                     let movie = {
                         id: response.data.results[i].id,
                         title: response.data.results[i].title,
@@ -58,40 +58,37 @@ export const ContextProvider = props => {
                 let actors = [];
                 let director;
                 let reviews = [];
-                let response1 = await api.getMovieDetail(path);
-                let response2 = await api.getCast(path);
-                let response3 = await api.getReviews(path);
-                
-                //Loop through response, if director is returned, set director variable
-                for (let i = 0; i < response2.data.crew.length; i++) {
-                    if (response2.data.crew[i].job === 'Director')
-                    director = response2.data.crew[i].name
+                let response = await api.getMovieDetail(path);
+                 //Loop through response, if director is returned, set director variable
+                for (let i = 0; i < response.data.credits.crew.length; i++) {
+                    if (response.data.credits.crew[i].job === 'Director')
+                    director = response.data.credits.crew[i].name
                 }
                 //Loop through actors and return first 5
                 for (let i = 0; i < 5; i++) {
-                    actors.push(response2.data.cast[i].name)
+                    actors.push(response.data.credits.cast[i].name)
                 }
                 //If reviews exist, return 2
                 for (let i = 0; i < 2; i++) {
-                    if (response3.data.results.length !== 0) {
+                    if (response.data.reviews.results.length !== 0) {
                     let review = [
-                        response3.data.results[i].content
+                        response.data.reviews.results[i].content
                     ]
                     reviews.push(review);
                     }
                 }
                 //set movie detail object that is used to update state
                 let movieDetail = {
-                    title: response1.data.title,
-                    overview: response1.data.overview,
-                    image: response1.data.poster_path,
-                    runningTime: response1.data.runtime,
-                    rating: response1.data.vote_average,
+                    title: response.data.title,
+                    overview: response.data.overview,
+                    image: response.data.poster_path,
+                    runningTime: response.data.runtime,
+                    rating: response.data.vote_average,
                     director: director,
                     actors: actors,
                     reviews: reviews
                 };
-                await setMovieDetail(movieDetail);
+                await setMovieDetail(movieDetail); 
             } catch (error) {
                 console.log(error);
             }

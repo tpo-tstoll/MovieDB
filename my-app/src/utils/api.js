@@ -11,17 +11,7 @@ export default {
     },
 
     getMovieDetail: async (path) => {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${path}?api_key=${apiKey}&language=en-US`);
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${path}?api_key=${apiKey}&language=en-US&append_to_response=credits,reviews`);
         return response;
     },
-
-    getCast: async (path) => {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${path}/credits?api_key=${apiKey}&language=en-US`);
-        return response;
-    },
-
-    getReviews: async (path) => {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${path}/reviews?api_key=${apiKey}&language=en-US&page=1`);
-        return response;
-    }
 }
