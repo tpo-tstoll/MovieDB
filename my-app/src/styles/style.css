@@ -1485,11 +1485,11 @@ ul.arrow {
   .main-navigation .search-form button {
     background-color: black;
     border: 3px solid #ffaa3c;
+    color: white;
     border-radius: 0;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     margin-left: -5px;
-    color: inherit;
     box-shadow: none;
     outline: none;
     -webkit-transition: .3s ease;
@@ -1545,7 +1545,9 @@ ul.arrow {
     text-align: center;
     font-size: 12px;
     font-size: 0.8em;
-    border: 1px solid #d7d8da;
+    color: white;
+    border: 1px solid #ffaa3c;
+    background-color: #000;
     border-radius: 3px;
     margin-right: 10px; }
   .movie-schedule .entry-title {
@@ -1715,4 +1717,14 @@ ul.arrow {
   align-items: center;
   height: 400px;
   border: none
+}
+
+.goBack{
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  style: float;
+  float: right;
 }

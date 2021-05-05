@@ -1,5 +1,5 @@
 import React, { useContext} from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import Context from '../context';
 
 
@@ -7,6 +7,11 @@ const MovieDetail = () => {
 
     const {value} = useContext(Context);
 
+    const history = useHistory();
+
+    const goBack = () => {
+        history.goBack();
+    }
 
     return (
         <main className="main-content">
@@ -14,7 +19,8 @@ const MovieDetail = () => {
                 <div className="page">
                     <div className="breadcrumbs">
                         <NavLink to='/'>Home</NavLink>
-                        <span>{value.movieDetail.title}</span>
+                        <span> {value.movieDetail.title}</span>
+                        <button onClick={goBack} className="goBack">Go Back</button>
                     </div>
                     <div className="content">
                         <div className="row">
