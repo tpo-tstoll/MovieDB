@@ -60,41 +60,21 @@ export const ContextProvider = props => {
             let movieList = [];
             const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
             let d = new Date();
-			let firstDay = new Date(d.getFullYear(), d.getMonth(), 1).toLocaleDateString("en-ZA", options).replaceAll('/','-');
-			let lastDay = new Date(d.getFullYear(), d.getMonth() + 1 , 0).toLocaleDateString("en-ZA", options).replaceAll('/','-');
-			let nextFirstDay = new Date(d.getFullYear(), d.getMonth() + 1, 1).toLocaleDateString("en-ZA", options).replaceAll('/','-');
-			let nextLastDay = new Date(d.getFullYear(), d.getMonth() + 2 , 0).toLocaleDateString("en-ZA", options).replaceAll('/','-');
-			let finalFirstDay = new Date(d.getFullYear(), d.getMonth() + 2, 1).toLocaleDateString("en-ZA", options).replaceAll('/','-');
-			let finalLastDay = new Date(d.getFullYear(), d.getMonth() + 3 , 0).toLocaleDateString("en-ZA", options).replaceAll('/','-');
 			try {
-				let response = await api.getUpcoming(firstDay, lastDay);
-					for (let i = 0; i < 4; i++) {
-						let movie = {
-							id: response.data.results[i].id,
-							title: response.data.results[i].title,
-							release: response.data.results[i].release_date
-						}
-						movieList.push(movie);
-					}
-				let response2 = await api.getUpcoming(nextFirstDay, nextLastDay);
-					for (let i = 0; i < 4; i++) {
-					let movie = {
-						id: response2.data.results[i].id,
-						title: response2.data.results[i].title,
-						release: response2.data.results[i].release_date
-					}
-					movieList.push(movie);
-				}
-				let response3 = await api.getUpcoming(finalFirstDay, finalLastDay);
-					for (let i = 0; i < 4; i++) {
-						let movie = {
-							id: response3.data.results[i].id,
-							title: response3.data.results[i].title,
-							release: response3.data.results[i].release_date
-						}
-						movieList.push(movie);
-					}
-				await value.setUpcoming(movieList);
+                for(let i = 0; i < 3; i++) {
+                    let firstDay = new Date(d.getFullYear(), d.getMonth() + i, 1).toLocaleDateString("en-ZA", options).replaceAll('/','-');
+                    let lastDay = new Date(d.getFullYear(), d.getMonth() + i + 1 , 0).toLocaleDateString("en-ZA", options).replaceAll('/','-');
+                    let response = await api.getUpcoming(firstDay, lastDay);
+                        for (let j = 0; j < 4; j++) {
+                            let movie = {
+                                id: response.data.results[j].id,
+                                title: response.data.results[j].title,
+                                release: response.data.results[j].release_date
+                            }
+                        movieList.push(movie);
+                        }
+                }
+                await setUpcoming(movieList);
 			} catch (error) {
 				console.log(error);
 			}
