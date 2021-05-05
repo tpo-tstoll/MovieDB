@@ -1,6 +1,5 @@
-import React, { useContext, useEffect} from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import api from '../utils/api';
 import Context from '../context';
 
 
@@ -8,6 +7,7 @@ const Movies = () => {
 
 	const {value} = useContext(Context);
 	
+	//Get current date and set options to dynamically update premier headers in return
 	let d = new Date();
 	const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 

@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import api from '../utils/api';
 
 const Context = React.createContext();
 
 export const ContextProvider = props => {
-    //locate path and store to variable
-    let path = useLocation().pathname.substring(1)
-
-    //State for search resuts
-    const [ searchResults, setSearchResults ] = useState([{
-        id: '',
-        title: '',
-        year: '',
-        image: ''
-    }])
 
     //Create movies state to contain array of movies
     const [ movies, setMovies ] = useState([{
@@ -81,6 +70,14 @@ export const ContextProvider = props => {
 		}
     	getPremiers();
     }, [])
+
+    //State for search resuts
+    const [ searchResults, setSearchResults ] = useState([{
+        id: '',
+        title: '',
+        year: '',
+        image: ''
+    }])
 
     //State that contains details on a specific movie
     const [movieDetail, setMovieDetail] = useState({

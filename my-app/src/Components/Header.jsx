@@ -10,6 +10,7 @@ const Header = () => {
     const searchInput = useRef('');
     const history = useHistory();
 
+    //onSubmit function to set stateful component with results from user search input
     const onSubmit = async (e) => {
         e.preventDefault();
         let resultArray = [];

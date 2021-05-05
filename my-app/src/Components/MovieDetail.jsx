@@ -9,12 +9,15 @@ const MovieDetail = () => {
     const {value} = useContext(Context);
 
     const history = useHistory();
+    //Locate movie id that is stored in path, removes intial '/'
     let path = useLocation().pathname.substring(1)
 
+    //Function to go back 1 page in browser
     const goBack = () => {
         history.goBack();
     }
 
+    //Function to get movie data based upon path/id, and set state conditionally with response data
     useEffect(() => {
         const getMoviedetail = async () => {
             try {
@@ -27,13 +30,13 @@ const MovieDetail = () => {
                     if (response.data.credits.crew[i].job === 'Director')
                     director = response.data.credits.crew[i].name
                 }
-                //Loop through actors and return first 5
+                //Loop through actors if actors are returned and push actors to array up to a total of 5
                 if (response.data.credits.cast.length !== 0) {
                     for (let i = 0; i < response.data.credits.cast.length && i < 5; i++) {
                         actors.push(response.data.credits.cast[i].name)
                     }
                 }
-                //If reviews exist, return 2
+                //If reviews exist, return up to 2
                 if (response.data.reviews.results.length !== 0) {
                     for (let i = 0; i < response.data.reviews.results.length && i < 2; i++) {
                         let review = [
