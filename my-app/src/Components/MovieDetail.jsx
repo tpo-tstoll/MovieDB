@@ -1,6 +1,7 @@
-import React, { useContext} from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import React, { useContext, useEffect} from 'react';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import Context from '../context';
+import api from '../utils/api';
 
 
 const MovieDetail = () => {
@@ -8,11 +9,59 @@ const MovieDetail = () => {
     const {value} = useContext(Context);
 
     const history = useHistory();
+    let path = useLocation().pathname.substring(1)
 
     const goBack = () => {
         history.goBack();
     }
 
+    useEffect(() => {
+        const getMoviedetail = async () => {
+            try {
+                let actors = [];
+                let director;
+                let reviews = [];
+                let response = await api.getMovieDetail(path);
+                 //Loop through response, if director is returned, set director variable
+                for (let i = 0; i < response.data.credits.crew.length; i++) {
+                    if (response.data.credits.crew[i].job === 'Director')
+                    director = response.data.credits.crew[i].name
+                }
+                //Loop through actors and return first 5
+                if (response.data.credits.cast.length !== 0) {
+                    for (let i = 0; i < response.data.credits.cast.length && i < 5; i++) {
+                        actors.push(response.data.credits.cast[i].name)
+                    }
+                }
+                //If reviews exist, return 2
+                if (response.data.reviews.results.length !== 0) {
+                    for (let i = 0; i < response.data.reviews.results.length && i < 2; i++) {
+                        let review = [
+                            response.data.reviews.results[i].content
+                        ]
+                        reviews.push(review);
+                        }
+                }
+                //set movie detail object that is used to update state
+                let movieDetail = {
+                    title: response.data.title ? response.data.title : null,
+                    overview: response.data.overview ? response.data.overview : null,
+                    image: response.data.poster_path ? response.data.poster_path : null,
+                    runningTime: response.data.runtime ? response.data.runtime : null,
+                    rating: response.data.vote_average ? response.data.vote_average : null,
+                    director: director,
+                    actors: actors,
+                    reviews: reviews
+                };
+                await value.setMovieDetail(movieDetail); 
+            } catch (error) {
+                console.log(error);
+            }
+    }
+        getMoviedetail();
+    }, [])
+
+    // eslint-disable-next-line
     return (
         <main className="main-content">
             <div className="container">
@@ -43,8 +92,8 @@ const MovieDetail = () => {
                                     <li><strong>Length:</strong> {value.movieDetail.runningTime}</li>
                                 </ul>
                                 <ul className="starring">
-                                    <li><strong>Director:</strong> {value.movieDetail.director} </li>
-                                    <li><strong>Stars:</strong> {value.movieDetail.actors.map(actor => { return <>{actor} | </>})} </li>
+                                    <li key={value.movieDetail.director}><strong>Director:</strong> {value.movieDetail.director} </li>
+                                    <li key={path}><strong>Stars:</strong> {value.movieDetail.actors.map(actor => { return <>{actor} | </>})} </li>
                                 </ul>
                                 <hr />
                                 <div className="entry-content">
