@@ -8,12 +8,53 @@ export const ContextProvider = props => {
     //locate path and store to variable
     let path = useLocation().pathname.substring(1)
 
+    //State for search resuts
+    const [ searchResults, setSearchResults ] = useState([{
+        id: '',
+        title: '',
+        year: '',
+        image: ''
+    }])
+
+    //Create movies state to contain array of movies
+    const [ movies, setMovies ] = useState([{
+        id: '',
+        title: '',
+        overview: '',
+        image: ''
+    }])
+
+    //useEffect to get a list of movies, and set movies state
+    useEffect(() => {
+        const getMovieList = async () => {
+        let movieList = [];
+        try {
+           let response = await api.getMovies();
+            for (let i = 0; i < 3; i++) {
+                    let movie = {
+                        id: response.data.results[i].id,
+                        title: response.data.results[i].title,
+                        overview: response.data.results[i].overview,
+                        image: response.data.results[i].poster_path
+                    };
+                    movieList.push(movie);
+            }
+           await setMovies(movieList);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    getMovieList();
+    }, [])
+
+    //State that holds the top 4 upcoming movies from each of the next 3 months
     const [ upcoming, setUpcoming ] = useState([{
         id: '',
         title: '', 
         release: ''
     }]);
 
+    //Use effect to determine the next 3 months begining and end date, then complete api calls with the info
 	useEffect(() => {
         const getPremiers = async () => {
             let movieList = [];
@@ -61,46 +102,6 @@ export const ContextProvider = props => {
     	getPremiers();
     }, [])
 
-
-    //State for search resuts
-    const [ searchResults, setSearchResults ] = useState([{
-        id: '',
-        title: '',
-        year: '',
-        image: ''
-    }])
-
-    //Create movies state to contain array of movies
-    const [ movies, setMovies ] = useState([{
-        id: '',
-        title: '',
-        overview: '',
-        image: ''
-    }])
-
-    //useEffect to get a list of movies, and set movies state
-    useEffect(() => {
-        const getMovieList = async () => {
-        let movieList = [];
-        try {
-           let response = await api.getMovies();
-            for (let i = 0; i < 3; i++) {
-                    let movie = {
-                        id: response.data.results[i].id,
-                        title: response.data.results[i].title,
-                        overview: response.data.results[i].overview,
-                        image: response.data.results[i].poster_path
-                    };
-                    movieList.push(movie);
-            }
-           await setMovies(movieList);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    getMovieList();
-    }, [])
-
     //State that contains details on a specific movie
     const [movieDetail, setMovieDetail] = useState({
         title: '',
@@ -113,7 +114,7 @@ export const ContextProvider = props => {
         reviews: []
     });
 
-    //Perform 3 API calls to get needed info, set state based upon responses
+    //Perform API call to get needed movie info, set state based upon responses
     useEffect(() => {
         const getMoviedetail = async () => {
             try {
