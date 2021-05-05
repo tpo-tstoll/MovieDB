@@ -21,7 +21,7 @@ const Movies = () => {
 								<ul className="slides">
                                     {value.movies.map(movie => {
                                        return <li className='col-md-4' key={movie.id}><NavLink to={`/${movie.id}`}><img src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title}></img>
-                                       <h2 className='maintitle'>{movie.title}</h2></NavLink>
+                                       <p /><h2 className='maintitle'>{movie.title}</h2></NavLink>
                                        {movie.overview}<p /></li>
                                     })}
                                 </ul>
