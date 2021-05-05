@@ -19,7 +19,7 @@ export const ContextProvider = props => {
         let movieList = [];
         try {
            let response = await api.getMovies();
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 15; i++) {
                     let movie = {
                         id: response.data.results[i].id,
                         title: response.data.results[i].title,

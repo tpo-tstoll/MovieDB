@@ -1728,3 +1728,8 @@ ul.arrow {
   style: float;
   float: right;
 }
+
+.today{
+  color: inherit;
+  font-style: italic;
+}
