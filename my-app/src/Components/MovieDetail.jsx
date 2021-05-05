@@ -77,7 +77,7 @@ const MovieDetail = () => {
                     <div className="content">
                         <div className="row">
                             <div className="col-md-6">
-                                <figure className="movie-poster"><img src={`https://image.tmdb.org/t/p/original${value.movieDetail.image}`} alt={value.movieDetail.title}></img></figure>
+                                <figure className="movie-poster"><img src={value.movieDetail.image ? `https://image.tmdb.org/t/p/original${value.movieDetail.image}` : '1.jpg'} alt={value.movieDetail.title}></img></figure>
                             </div>
                             <div className="col-md-6">
                                 <h2 className="movie-title">{value.movieDetail.title}</h2>

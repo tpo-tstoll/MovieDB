@@ -16,8 +16,8 @@ export default {
         return response;
     },
 
-    getSearchResults: async (search) => {
-        const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${search}&include_adult=false}&append_to_response=genre`);
+    getSearchResults: async (search, page) => {
+        const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${search}&include_adult=false}&page=${page}&append_to_response=genre`);
         return response;
     },
 
