@@ -92,8 +92,8 @@ const MovieDetail = () => {
                                     <li><strong>Length:</strong> {value.movieDetail.runningTime}</li>
                                 </ul>
                                 <ul className="starring">
-                                    <li key={value.movieDetail.director}><strong>Director:</strong> {value.movieDetail.director} </li>
-                                    <li key={path}><strong>Stars:</strong> {value.movieDetail.actors.map(actor => { return <>{actor} | </>})} </li>
+                                    <li key={value.movieDetail.director}><strong>Director:</strong> {value.movieDetail.director ? value.movieDetail.director : "Sorry no director was located for this film"} </li>
+                                    <li key={path}><strong>Stars:</strong> {value.movieDetail.actors.length > 0 ? value.movieDetail.actors.map(actor => { return <>{actor} | </>}) : "Sorry no actors were located for this film"} </li>
                                 </ul>
                                 <hr />
                                 <div className="entry-content">
