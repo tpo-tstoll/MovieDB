@@ -20,14 +20,11 @@ const SearchResults = () => {
 
       const addPagination = () => {
         const numOfButtons = Math.ceil(value.searchResults.length/5);
-        let buttons = [];
       
         for (let i=1; i <= numOfButtons; i++) {
             carouselItems.push(i);
         };
       }
-
-    
 
     const CustomDot = ({ onClick, ...rest }) => {
         const {
@@ -35,10 +32,9 @@ const SearchResults = () => {
             active,
         } = rest;
         addPagination();
-        console.log(carouselItems);
         return (
             <button
-            className={active ? "active" : "inactive"}
+            className={`pagination ${active ? "active" : "inactive"}`}
             onClick={() => onClick()}
             >
             {React.Children.toArray(carouselItems)[index]}

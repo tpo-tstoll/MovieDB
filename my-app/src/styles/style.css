@@ -1741,3 +1741,14 @@ ul.arrow {
   color: inherit;
   font-style: italic;
 }
+
+.pagination{
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  font-size: 12px;
+  font-size: 0.8em;
+  color: white;
+  border: 1px solid #ffaa3c;
+  background-color: #000;
+}
