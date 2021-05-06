@@ -16,7 +16,7 @@ const Header = () => {
         let resultArray = [];
         let response = await api.getSearchResults(searchInput.current.value, 1);
         console.log(response);
-        for (let j=1; j <= response.data.total_pages; j++) {
+        for (let j=1; j <= 5; j++) {
             let response = await api.getSearchResults(searchInput.current.value, j);
             for (let i = 0; i < response.data.results.length; i++ ) {
                 let results = {

@@ -16,6 +16,36 @@ const SearchResults = () => {
         }
       };
 
+      const carouselItems =[]
+
+      const addPagination = () => {
+        const numOfButtons = Math.ceil(value.searchResults.length/5);
+        let buttons = [];
+      
+        for (let i=1; i <= numOfButtons; i++) {
+            carouselItems.push(i);
+        };
+      }
+
+    
+
+    const CustomDot = ({ onClick, ...rest }) => {
+        const {
+            index,
+            active,
+        } = rest;
+        addPagination();
+        console.log(carouselItems);
+        return (
+            <button
+            className={active ? "active" : "inactive"}
+            onClick={() => onClick()}
+            >
+            {React.Children.toArray(carouselItems)[index]}
+            </button>
+        );
+    };
+
     return (
         <main className="main-content">
         <div className="container">
@@ -24,7 +54,7 @@ const SearchResults = () => {
                     <div className="col-md-12">
                         <div className="slider">
                         <h2>Search Results: {value.searchResults.length}</h2>
-                            <Carousel responsive={responsive} showDots={true}>
+                            <Carousel responsive={responsive} showDots customDot={<CustomDot />}>
                                 {value.searchResults.map(movie => {
                                    return <ul className="slides"> <li className='col-md-12 search-col-centered' key={movie.id}><NavLink to={`/${movie.id}`}><img src={movie.image ? `https://image.tmdb.org/t/p/original${movie.image}` : '/1.jpg'} alt={movie.title}></img></NavLink></li>
                                    <li className="col-md-12 search-col-centered"><NavLink to={`/${movie.id}`}><h1 className='maintitle'>{movie.title.length > 35 ? `${movie.title.substring(0,35)}...` : movie.title}</h1>
