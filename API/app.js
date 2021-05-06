@@ -1,6 +1,7 @@
 'use strict'
 const express = require('express');
 const db = require('./models');
+const userRoute = require('./routes/users');
 const cors = require('cors');
 
 const app = express();
@@ -13,6 +14,8 @@ app.use(cors());
 
 // Body parser
 app.use(express.json());
+
+app.use(userRoute);
 
 (async () => {
     await db.sequelize.sync();
