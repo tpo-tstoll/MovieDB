@@ -14,8 +14,7 @@ const Header = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         let resultArray = [];
-        let response = await api.getSearchResults(searchInput.current.value, 1);
-        console.log(response);
+        history.push(`/search/${searchInput.current.value}`)
         for (let j=1; j <= 6; j++) {
             let response = await api.getSearchResults(searchInput.current.value, j);
             for (let i = 0; i < response.data.results.length; i++ ) {
@@ -29,7 +28,6 @@ const Header = () => {
             }
         }
         value.setSearchResults(resultArray);
-        history.push(`/search/${searchInput.current.value}`)
         searchInput.current.value = null;
     }
 
