@@ -1719,6 +1719,14 @@ ul.arrow {
   border: none
 }
 
+.search-col-centered{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  border: none
+}
+
 .goBack{
   background-color: transparent;
   color: inherit;
