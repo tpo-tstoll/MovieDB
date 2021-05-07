@@ -33,7 +33,7 @@ const Movies = () => {
 									{value.upcoming.slice(0,4).map(movie => {
 											return <li key={movie.id}>
 												<div className="date">{movie.release.substring(5)}</div>
-												<h2 className="entry-title"><NavLink to={`/${movie.id}`}>{movie.title}</NavLink></h2>
+												<h2 className="entry-title"><NavLink to={`/movie/${movie.id}`}>{movie.title}</NavLink></h2>
 											</li>	
 									})}
 								</ul>
@@ -45,7 +45,7 @@ const Movies = () => {
 									{value.upcoming.slice(4,8).map(movie => {
 												return <li key={movie.id}>
 													<div className="date">{movie.release.substring(5)}</div>
-													<h2 className="entry-title"><NavLink to={`/${movie.id}`}>{movie.title}</NavLink></h2>
+													<h2 className="entry-title"><NavLink to={`/movie/${movie.id}`}>{movie.title}</NavLink></h2>
 												</li>	
 										})}
 								</ul>
@@ -57,7 +57,7 @@ const Movies = () => {
 									{value.upcoming.slice(8,12).map(movie => {
 										return <li key={movie.id}>
 											<div className="date">{movie.release.substring(5)}</div>
-											<h2 className="entry-title"><NavLink to={`/${movie.id}`}>{movie.title}</NavLink></h2>
+											<h2 className="entry-title"><NavLink to={`/movie/${movie.id}`}>{movie.title}</NavLink></h2>
 										</li>	
 									})}
 								</ul>

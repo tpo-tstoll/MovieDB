@@ -41,22 +41,34 @@ const Header = () => {
                         <small className="site-description">Tommy knows movies</small>
                     </div>
                 </NavLink>
-
+                <div>
                 <div className="main-navigation">
                     <button type="button" className="menu-toggle"><i className="fa fa-bars"></i></button>
                     <ul className="menu">
                         <li className="menu-item current-menu-item"><NavLink to="/">Home</NavLink></li>
                         <li className="menu-item"><NavLink to="about.html">About</NavLink></li>
-                        <li className="menu-item"><NavLink to="review.html">Movie reviews</NavLink></li>
-                        <li className="menu-item"><NavLink to="joinus.html">Join us</NavLink></li>
-                        <li className="menu-item"><NavLink to="contact.html">Contact</NavLink></li>
+                        {value.user.authenticated ? <>
+                            <li className="menu-item"><NavLink to="/favorites">Favorites</NavLink></li>
+                            <li className="menu-item"><NavLink to="/signout">Sign out</NavLink></li></>
+                            :
+                            <>
+                            <li className="menu-item"><NavLink to="/signup">Sign Up</NavLink></li>
+                            <li className="menu-item"><NavLink to="/signin">Sign In</NavLink></li></>
+                            }
                     </ul>
                     <form action='/search' onSubmit={onSubmit} className="search-form">
                         <input type="text" placeholder="Search..." ref={searchInput}/>
                         <button><i className="fa fa-search" /> Go</button>
 					</form>
                 </div>
+                {value.user.authenticated ? <>
+                            <h4 className='welcome'>Welcome {value.user.userName}!</h4> </>
+                            :
+                            null
+                }
+                </div>
 
+    
                 <div className="mobile-navigation"></div>
         </div>
     </header>

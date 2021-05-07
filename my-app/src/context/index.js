@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import api from '../utils/api';
 
 const Context = React.createContext();
 
 export const ContextProvider = props => {
+
+    const history = useHistory();
+    const path = useLocation().pathname;
 
     //Create movies state to contain array of movies
     const [ movies, setMovies ] = useState([{
@@ -79,6 +83,11 @@ export const ContextProvider = props => {
         image: ''
     }])
 
+    const [user, setUser] = useState({
+        authenticated: false,
+        userName: '',
+    });
+
     //State that contains details on a specific movie
     const [movieDetail, setMovieDetail] = useState({
         title: '',
@@ -91,14 +100,38 @@ export const ContextProvider = props => {
         reviews: []
     });
 
+    const [error, setError] = useState([]);
+
+    const asyncHandler = async cb => {
+        try {
+            await cb()
+        } catch (error) {
+            const { response: { data, data: { errors } } } = error;
+                    setError(data);
+            }
+        }
+
+     //reset validation errors on path change
+     useEffect(() => {
+        setError(null);
+    }, [path])
+
+
+
+
     const value = {
         movies,
         movieDetail,
         searchResults,
         upcoming,
+        user,
+        error,
         setUpcoming,
         setSearchResults,
-        setMovieDetail
+        setMovieDetail,
+        setUser,
+        asyncHandler,
+        setError
     }
 
     return (

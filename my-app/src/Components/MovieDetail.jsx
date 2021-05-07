@@ -10,7 +10,7 @@ const MovieDetail = () => {
 
     const history = useHistory();
     //Locate movie id that is stored in path, removes intial '/'
-    let path = useLocation().pathname.substring(1)
+    let path = useLocation().pathname.substring(7)
 
     //Function to go back 1 page in browser
     const goBack = () => {

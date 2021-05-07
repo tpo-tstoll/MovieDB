@@ -18,11 +18,12 @@ const MovieSlider = () => {
         }
       };
 
+
     return (
         
         <Carousel responsive={responsive}>
             {value.movies.map(movie => {
-                return <li className='col-md-12' key={movie.id}><NavLink to={`/${movie.id}`}><img src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title}></img>
+                return <li className='col-md-12' key={movie.id}><NavLink to={`/movie/${movie.id}`}><img src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title}></img>
                 <p /><h2 className='maintitle'>{movie.title}</h2></NavLink>
                 {`${movie.overview.substring(350,0)}...`}<p /></li>
             })}

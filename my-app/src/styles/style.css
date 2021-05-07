@@ -1752,3 +1752,70 @@ ul.arrow {
   border: 1px solid #ffaa3c;
   background-color: #000;
 }
+
+/* Sign In */
+.txt-footer {
+  background-color: #000;
+  color: white;
+  border-radius: .5rem;
+  padding: 4px 0 4px 0 ;
+  text-align:center;
+}
+
+.buttonsDiv{
+  text-align:center;
+}
+
+.buttons {
+  font-weight: bold;
+  font-size: larger;
+  margin: 10px;
+  padding: 4px;
+  background-color: #000;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: .5rem;
+  box-shadow: 5px 5px #888888;
+}
+
+.buttons:hover{
+  background-color: #ffaa3c;
+  color: white;
+}
+
+.signup-link {
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: #ffaa3c;
+  font-weight: bold;
+  font-size: large;
+}
+
+.signup-link:hover {
+  -webkit-text-fill-color: #ffaa3c;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: #ffaa3c;
+}
+
+.signinform {
+  width: 100%;
+  align-content:;
+  margin: 0 auto;
+}
+
+.welcome {
+  color: #ffaa3c;
+  text-align: end;
+  padding-top: 5%;
+  margin-bottom: 0px;
+}
+
+
+/* Validation Errors */
+
+#error {
+  margin: 5% 0 5% 0;
+  color: #ffaa3c;
+  font-weight: bolder;
+}
