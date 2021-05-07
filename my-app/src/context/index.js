@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import api from '../utils/api';
 
 const Context = React.createContext();
@@ -86,7 +87,29 @@ export const ContextProvider = props => {
     const [user, setUser] = useState({
         authenticated: false,
         userName: '',
+        email: '',
+        password: ''
     });
+
+    useEffect(() => {
+        if (user.authenticated) {
+            Cookies.set('loggedIn', 'true', {expires: 1})
+            Cookies.set('username', value.user.userName, {expires: 1})
+            Cookies.set('email', value.user.email, {expires: 1});
+            Cookies.set('pass', value.user.password, {expires: 1});
+        }
+    }, [user])
+
+    useEffect(() => {
+        if (Cookies.get('loggedIn') === 'true') {
+            setUser({
+                authenticated: true,
+                email: Cookies.get('email'),
+                userName: Cookies.get('username'),
+                password: Cookies.get('pass')
+            })
+        }
+    }, [])
 
     //State that contains details on a specific movie
     const [movieDetail, setMovieDetail] = useState({
@@ -101,19 +124,30 @@ export const ContextProvider = props => {
     });
 
     const [error, setError] = useState([]);
-
+    const [validationError, setValidationError] = useState(null);
     const asyncHandler = async cb => {
         try {
             await cb()
         } catch (error) {
-            const { response: { data, data: { errors } } } = error;
+            const { response: { status, data, data: { errors } } } = error;
+            switch (status) {
+                case 400:
+                    setValidationError(errors);
+                    break;
+                case 401:
                     setError(data);
+                    break;
+                default:
+                    history.push('/error');
+                    break;
             }
         }
+    }
 
      //reset validation errors on path change
      useEffect(() => {
         setError(null);
+        setValidationError(null);
     }, [path])
 
 
@@ -126,6 +160,7 @@ export const ContextProvider = props => {
         upcoming,
         user,
         error,
+        validationError,
         setUpcoming,
         setSearchResults,
         setMovieDetail,

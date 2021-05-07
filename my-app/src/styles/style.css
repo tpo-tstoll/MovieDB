@@ -1570,13 +1570,16 @@ ul.arrow {
   font-weight: 300; }
 
 .page figure {
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+ }
 .page img {
-  max-width: 100%; }
+  max-width: 100%;
+ }
 .page .movie-title {
   font-size: 36px;
   font-size: 2.4em;
-  font-weight: 300; }
+  font-weight: 300;
+}
 
 .filters {
   margin-bottom: 50px; }
@@ -1733,7 +1736,6 @@ ul.arrow {
   border: none;
   box-shadow: none;
   outline: none;
-  style: float;
   float: right;
 }
 
@@ -1780,7 +1782,7 @@ ul.arrow {
 }
 
 .buttons:hover{
-  background-color: #ffaa3c;
+  background-color: #864e04;
   color: white;
 }
 
@@ -1800,7 +1802,6 @@ ul.arrow {
 
 .signinform {
   width: 100%;
-  align-content:;
   margin: 0 auto;
 }
 
@@ -1810,6 +1811,33 @@ ul.arrow {
   padding-top: 5%;
   margin-bottom: 0px;
 }
+
+.form--centered {
+  background-color: #ffaa3c;
+  width: 450px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 25px;
+  color: black;
+  align-self: center;
+  position: absolute;
+  top: -750px;
+  left: -40px;
+  z-index: 3;
+}
+
+.tile {
+  width: 277px;
+  height: 423px;
+  padding-left: 2px;
+  padding-right: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+
 
 
 /* Validation Errors */

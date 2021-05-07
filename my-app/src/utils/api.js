@@ -27,10 +27,11 @@ export default {
     },
 
     getUser: async ( email, password) => {
+        const decodedPassword = atob(password);
         const response = await axios.get(`http://localhost:5000/api/users`, {
             auth: {
                 username: email,
-                password: password
+                password: decodedPassword
             }
         });
         return response;
