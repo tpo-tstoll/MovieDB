@@ -13,12 +13,6 @@ router.get('/movies', authenticateUser, asyncHandler(async (req, res) => {
         },
         attributes: {
             exclude: ['createdAt', 'updatedAt']
-        },
-        include: {
-            model: User,
-            attributes: {
-            exclude: ['createdAt', 'updatedAt']
-            }
         }
     })
     res.json(movies);
