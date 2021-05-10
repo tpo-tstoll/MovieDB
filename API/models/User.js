@@ -54,13 +54,22 @@ module.exports = (sequelize) => {
         }
       },
       set(val) {
-        if(val){
+        if (val) {
           const hashedPassword = bcrypt.hashSync(val, 10);
-          this.setDataValue('password', hashedPassword);  
+          this.setDataValue('password', hashedPassword);
         }
       }
     }
-  }, {sequelize});
+  }, { sequelize });
+
+  User.associate = (models) => {
+    User.hasMany(models.Movie, {
+      foreignKey: {
+        fieldName: 'userId',
+        allowNull: false
+      }
+    });
+  };
 
   return User;
 };

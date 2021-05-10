@@ -1,11 +1,11 @@
 'use strict'
 const router = require('express').Router();
-const { asyncHandler } = require('../middleware/asyncHandler');
-const { authenticateUser } = require('../middleware/authUser');
-const { User } = require('../models')
+const { asyncHandler } = require('../../middleware/asyncHandler');
+const { authenticateUser } = require('../../middleware/authUser');
+const { User } = require('../../models');
 
 // Get User
-router.get('/api/users', authenticateUser, asyncHandler((req, res) => {
+router.get('/users', authenticateUser, asyncHandler((req, res) => {
     const user = req.currentUser;
   
     res.status(200).json({
@@ -16,7 +16,7 @@ router.get('/api/users', authenticateUser, asyncHandler((req, res) => {
 }));
 
 // Post route to create a new user
-router.post('/api/users', asyncHandler(async (req, res, next) => {
+router.post('/users', asyncHandler(async (req, res, next) => {
     try {
       const user = req.body;
       await User.create(user);
