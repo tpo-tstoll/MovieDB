@@ -123,8 +123,12 @@ const MovieDetail = () => {
                                     <li key={value.movieDetail.director}><strong>Director:</strong> {value.movieDetail.director ? value.movieDetail.director : "Sorry no director was located for this film"} </li>
                                     <li key={path}><strong>Stars:</strong> {value.movieDetail.actors.length > 0 ? value.movieDetail.actors.map(actor => { return <>{actor} | </>}) : "Sorry no actors were located for this film"} </li>
                                 </ul>
-                                {value.user.authenticated ? <button onClick={addFavorite}>Add to Your Favorites</button> : null}
-                                {value.user.authenticated ? <button onClick={removeFavorite}>Remove From Favorites</button> : null}
+                                { value.user.authenticated ?
+                                    value.favorites.filter(movie => movie.title === value.movieDetail.title).length > 0 ? <button onClick={removeFavorite}>Remove From Favorites</button>
+                                :
+                                    <button onClick={addFavorite}>Add to Your Favorites</button> : null
+                                }
+                                
                                 <hr />
                                 <div className="entry-content">
                                     <h3>Reviews:</h3>
