@@ -88,7 +88,8 @@ export const ContextProvider = props => {
         authenticated: false,
         userName: '',
         email: '',
-        password: ''
+        password: '',
+        userId: '',
     });
 
     useEffect(() => {
@@ -97,6 +98,7 @@ export const ContextProvider = props => {
             Cookies.set('username', value.user.userName, {expires: 1})
             Cookies.set('email', value.user.email, {expires: 1});
             Cookies.set('pass', value.user.password, {expires: 1});
+            Cookies.set('id', value.user.userId, {expires: 1});
         }
     }, [user])
 
@@ -106,10 +108,18 @@ export const ContextProvider = props => {
                 authenticated: true,
                 email: Cookies.get('email'),
                 userName: Cookies.get('username'),
-                password: Cookies.get('pass')
+                password: Cookies.get('pass'),
+                userId: Cookies.get('id')
             })
         }
     }, [])
+
+    const [favorites, setFavorites] = useState([{
+        listId: '',
+        movieId: '',
+        title: '',
+        image: ''
+    }]);
 
     //State that contains details on a specific movie
     const [movieDetail, setMovieDetail] = useState({
@@ -160,13 +170,15 @@ export const ContextProvider = props => {
         upcoming,
         user,
         error,
+        favorites,
         validationError,
         setUpcoming,
         setSearchResults,
         setMovieDetail,
         setUser,
         asyncHandler,
-        setError
+        setError,
+        setFavorites
     }
 
     return (

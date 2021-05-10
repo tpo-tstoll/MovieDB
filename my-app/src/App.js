@@ -9,6 +9,7 @@ import SearchResults from './Components/SearchResults';
 import SignIn from './Components/SignIn';
 import SignUp from './Components/SignUp'
 import SignOut from './Components/SignOut';
+import Favorites from './Components/Favorites';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route exact path='/signin' component={SignIn} />
         <Route exact path='/signup' component={SignUp} />
         <Route exact path='/signout' component={SignOut} />
+        <Route exact path='/favorites' component={Favorites} />
         <Route exact path={'/movie/:id'} component={MovieDetail} />
         <Route path='/search/' component={SearchResults} />
       </Switch>

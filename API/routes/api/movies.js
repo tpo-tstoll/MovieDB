@@ -3,7 +3,6 @@ const router = require('express').Router();
 const { asyncHandler } = require('../../middleware/asyncHandler');
 const { authenticateUser } = require('../../middleware/authUser');
 const { Movie } = require('../../models');
-const { User } = require('../../models');
 
 router.get('/movies', authenticateUser, asyncHandler(async (req, res) => {
     const currentUserId = req.currentUser.id;
@@ -12,7 +11,7 @@ router.get('/movies', authenticateUser, asyncHandler(async (req, res) => {
             userId: currentUserId
         },
         attributes: {
-            exclude: ['createdAt', 'updatedAt']
+            exclude: ['createdAt', 'updatedAt', 'userId']
         }
     })
     res.json(movies);
@@ -36,8 +35,12 @@ router.get('/movies', authenticateUser, asyncHandler(async (req, res) => {
   }));
 
   router.delete('/movies/:id', authenticateUser, asyncHandler( async(req, res) => {
-    const movie = await Movie.findByPk(req.params.id);
     const userId = req.currentUser.id;
+    const movie = await Movie.findOne({
+      where: {
+        movieId: req.params.id,
+        userId: userId
+    }})
     if (userId === movie.userId) {
       await movie.destroy();
       res.status(204).end();

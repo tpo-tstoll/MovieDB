@@ -1,0 +1,87 @@
+import React, { useContext, useEffect} from 'react';
+import { NavLink } from 'react-router-dom';
+import api from '../utils/api'
+import Context from '../context';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
+const Favorites = () => {
+
+    const {value} = useContext(Context);
+
+    useEffect(() => {
+        const favoriteList = [];
+        const getFavoriteList = async () => {
+            let response = await api.getFavorites(value.user.email, value.user.password);
+            for (let i = 0; i < response.data.length; i++) {
+                let favorite = {
+                    listId: response.data[i].id,
+                    movieId: response.data[i].movieId,
+                    title: response.data[i].title,
+                    image: response.data[i].image
+                }
+                favoriteList.push(favorite);
+            }
+            await value.setFavorites(favoriteList);
+        }
+        getFavoriteList();
+    }, [])
+
+    const responsive = {
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 5,
+          slidesToSlide: 5
+        }
+      };
+
+      const carouselItems =[]
+
+      const addPagination = () => {
+        const numOfButtons = Math.ceil(value.favorites.length/5);
+      
+        for (let i=1; i <= numOfButtons; i++) {
+            carouselItems.push(i);
+        };
+      }
+
+    const CustomDot = ({ onClick, ...rest }) => {
+        const {
+            index,
+            active,
+        } = rest;
+        addPagination();
+        return (
+            <button
+            className={`pagination ${active ? "active" : "inactive"}`}
+            onClick={() => onClick()}
+            >
+            {React.Children.toArray(carouselItems)[index]}
+            </button>
+        );
+    };
+    
+    return (
+        <main className="main-content">
+        <div className="container">
+            <div className="page">
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className="slider">
+                        <h2>Your Favorites: {value.favorites.length}</h2>
+                            <Carousel responsive={responsive} showDots customDot={<CustomDot />}>
+                                {value.favorites.map(movie => {
+                                   return <ul className="slides"> <li className='col-md-12 search-col-centered' key={movie.movieId}><NavLink to={`/movie/${movie.movieId}`}><img src={movie.image ? `https://image.tmdb.org/t/p/original${movie.image}` : '/1.jpg'} alt={movie.title}></img></NavLink></li>
+                                   <li className="col-md-12 search-col-centered"><NavLink to={`/${movie.movieId}`}><h1 className='maintitle'>{movie.title.length > 35 ? `${movie.title.substring(0,35)}...` : movie.title}</h1></NavLink></li></ul>
+                                })}
+                            </Carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    )
+}
+
+export default Favorites;

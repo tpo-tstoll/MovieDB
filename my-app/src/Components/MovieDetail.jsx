@@ -17,6 +17,30 @@ const MovieDetail = () => {
         history.goBack();
     }
 
+    const addFavorite = async () => {
+        const favorite = {
+            "movieId": path,
+            "title": value.movieDetail.title,
+            "image": value.movieDetail.image,
+            "userId": value.user.userId
+        }
+        try {
+            let response = await api.postFavorite(value.user.email, value.user.password, favorite);
+            console.log(response.status);
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
+    const removeFavorite = async () => {
+        try {
+            let response = await api.removeFavorite(value.user.email, value.user.password, path);
+            console.log(response.status);
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
     //Function to get movie data based upon path/id, and set state conditionally with response data
     useEffect(() => {
         const getMoviedetail = async () => {
@@ -73,6 +97,7 @@ const MovieDetail = () => {
                         <NavLink to='/'>Home</NavLink>
                         <span> {value.movieDetail.title}</span>
                         <button onClick={goBack} className="goBack">Go Back</button>
+                        
                     </div>
                     <div className="content">
                         <div className="row">
@@ -98,6 +123,8 @@ const MovieDetail = () => {
                                     <li key={value.movieDetail.director}><strong>Director:</strong> {value.movieDetail.director ? value.movieDetail.director : "Sorry no director was located for this film"} </li>
                                     <li key={path}><strong>Stars:</strong> {value.movieDetail.actors.length > 0 ? value.movieDetail.actors.map(actor => { return <>{actor} | </>}) : "Sorry no actors were located for this film"} </li>
                                 </ul>
+                                {value.user.authenticated ? <button onClick={addFavorite}>Add to Your Favorites</button> : null}
+                                {value.user.authenticated ? <button onClick={removeFavorite}>Remove From Favorites</button> : null}
                                 <hr />
                                 <div className="entry-content">
                                     <h3>Reviews:</h3>

@@ -23,15 +23,6 @@ module.exports = (sequelize) => {
                 }
             }
         },
-        releaseDate: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notNull: {
-                    msg: 'A Release Date is required'
-                }
-            }
-        },
         image: {
             type: DataTypes.STRING,
             allowNull: false,

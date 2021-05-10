@@ -48,4 +48,42 @@ export default {
         return await response;
 
     },
+
+    getFavorites: async ( email, password) => {
+        const decodedPassword = atob(password);
+        const response = await axios.get(`http://localhost:5000/api/movies`, {
+            auth: {
+                username: email,
+                password: decodedPassword
+            }
+        });
+        return response;
+    },
+
+    postFavorite: async ( email, password, favorite) => {
+        const decodedPassword = atob(password);
+        const response = await axios.post(`http://localhost:5000/api/movies`,
+            favorite,
+            {
+                auth: {
+                  username: email,
+                  password: decodedPassword
+                }
+            }
+        ); 
+        return response;
+    },
+
+    removeFavorite: async ( email, password, path) => {
+        const decodedPassword = atob(password);
+        const response = await axios.delete(`http://localhost:5000/api/movies/${path}`,
+            {
+                auth: {
+                  username: email,
+                  password: decodedPassword
+                }
+            }
+        ); 
+        return response;
+    }
 }

@@ -26,7 +26,8 @@ const SignUp = () => {
             authenticated: true,
             userName: response.data.name,
             email: response.data.email,
-            password: encodedPassword
+            password: encodedPassword,
+            userId: response.data.id
         }); 
 
         history.push('/');
