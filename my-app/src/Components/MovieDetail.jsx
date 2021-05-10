@@ -26,21 +26,23 @@ const MovieDetail = () => {
         }
         try {
             let response = await api.postFavorite(value.user.email, value.user.password, favorite);
-            return response
+            return response;
         } catch(error) {
             console.log(error)
         }
-        window.location.forcedReload(false);
     }
 
     const removeFavorite = async () => {
         try {
             let response = await api.removeFavorite(value.user.email, value.user.password, path);
-            return response;
+            if (path !== value.movieDetail.id.toString()) {
+                history.goBack();
+            } else {
+                history.go(0);
+            };
         } catch(error) {
             console.log(error)
         }
-        window.location.forcedReload(false);
     }
 
     //Function to get movie data based upon path/id, and set state conditionally with response data
@@ -73,6 +75,7 @@ const MovieDetail = () => {
                 }
                 //set movie detail object that is used to update state
                 let movieDetail = {
+                    id: response.data.id,
                     title: response.data.title ? response.data.title : null,
                     overview: response.data.overview ? response.data.overview : null,
                     image: response.data.poster_path ? response.data.poster_path : null,
@@ -126,11 +129,13 @@ const MovieDetail = () => {
                                     <li key={value.movieDetail.director}><strong>Director:</strong> {value.movieDetail.director ? value.movieDetail.director : "Sorry no director was located for this film"} </li>
                                     <li key={path}><strong>Stars:</strong> {value.movieDetail.actors.length > 0 ? value.movieDetail.actors.map(actor => { return <>{actor} | </>}) : "Sorry no actors were located for this film"} </li>
                                 </ul>
-                                { value.user.authenticated ?
-                                    value.favorites.filter(movie => movie.title === value.movieDetail.title).length > 0 ? <button onClick={removeFavorite} className="buttons">Remove From Favorites</button>
-                                :
-                                    <button onClick={addFavorite} className="buttons">Add to Your Favorites</button> : null
-                                }                               
+                                    {value.favorites.filter(movie => movie.title === value.movieDetail.title).length === 0 && value.user.authenticated ?
+                                        <NavLink to={`/movie/${path}/`}><button onClick={addFavorite} className="buttons">Add to Your Favorites</button></NavLink> : null}
+                                    {value.favorites.filter(movie => movie.title === value.movieDetail.title).length > 0 && value.user.authenticated ? 
+                                        <button onClick={removeFavorite} className="buttons">Remove From Favorites</button> : null}
+                                
+                                    
+                                                               
                                 <hr />
                                 <div className="entry-content">
                                     <h3>Reviews:</h3>

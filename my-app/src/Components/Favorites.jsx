@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import Context from '../context';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';

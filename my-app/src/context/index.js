@@ -141,10 +141,11 @@ export const ContextProvider = props => {
         getFavoriteList();
     }
     // eslint-disable-next-line
-    }, [path])
+    }, [ path ])
 
     //State that contains details on a specific movie
     const [movieDetail, setMovieDetail] = useState({
+        id: '',
         title: '',
         overview: '',
         image: '',
