@@ -26,19 +26,21 @@ const MovieDetail = () => {
         }
         try {
             let response = await api.postFavorite(value.user.email, value.user.password, favorite);
-            console.log(response.status);
+            return response
         } catch(error) {
             console.log(error)
         }
+        window.location.forcedReload(false);
     }
 
     const removeFavorite = async () => {
         try {
             let response = await api.removeFavorite(value.user.email, value.user.password, path);
-            console.log(response.status);
+            return response;
         } catch(error) {
             console.log(error)
         }
+        window.location.forcedReload(false);
     }
 
     //Function to get movie data based upon path/id, and set state conditionally with response data
@@ -124,11 +126,10 @@ const MovieDetail = () => {
                                     <li key={path}><strong>Stars:</strong> {value.movieDetail.actors.length > 0 ? value.movieDetail.actors.map(actor => { return <>{actor} | </>}) : "Sorry no actors were located for this film"} </li>
                                 </ul>
                                 { value.user.authenticated ?
-                                    value.favorites.filter(movie => movie.title === value.movieDetail.title).length > 0 ? <button onClick={removeFavorite}>Remove From Favorites</button>
+                                    value.favorites.filter(movie => movie.title === value.movieDetail.title).length > 0 ? <button onClick={removeFavorite} className="buttons">Remove From Favorites</button>
                                 :
-                                    <button onClick={addFavorite}>Add to Your Favorites</button> : null
-                                }
-                                
+                                    <button onClick={addFavorite} className="buttons">Add to Your Favorites</button> : null
+                                }                               
                                 <hr />
                                 <div className="entry-content">
                                     <h3>Reviews:</h3>
