@@ -43,9 +43,9 @@ const Header = () => {
                 </NavLink>
                 <div>
                 <div className="main-navigation">
-                    <button type="button" className="menu-toggle"><i className="fa fa-bars"></i></button>
+                    <button type="button" className="menu-toggle" ><i className="fa fa-bars"></i></button>
                     <ul className="menu">
-                        <li className="menu-item current-menu-item"><NavLink to="/">Home</NavLink></li>
+                        <li className="menu-item"><NavLink to="/" >Home</NavLink></li>
                         <li className="menu-item"><NavLink to="about.html">About</NavLink></li>
                         {value.user.authenticated ? <>
                             <li className="menu-item"><NavLink to="/favorites">Favorites</NavLink></li>

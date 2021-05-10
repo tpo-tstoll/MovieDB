@@ -20,7 +20,7 @@ const SignUp = () => {
         const encodedPassword = btoa(passwordInput.current.value);
         await api.postCreateUser(firstNameInput.current.value, lastNameInput.current.value, emailInput.current.value, passwordInput.current.value);
         
-        const response = await api.getUser('users', emailInput.current.value, encodedPassword);
+        const response = await api.getUser(emailInput.current.value, encodedPassword);
 
         value.setUser({
             authenticated: true,
@@ -42,7 +42,7 @@ const SignUp = () => {
 
         const onSubmit = async (e) => {
             e.preventDefault();
-            value.actions.asyncHandler(createUser);
+            value.asyncHandler(createUser);
         }
 
     return (

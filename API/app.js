@@ -2,6 +2,7 @@
 const express = require('express');
 const db = require('./models');
 const userRoute = require('./routes/users');
+const errorHandler = require('./middleware/error-handler');
 const cors = require('cors');
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(userRoute);
+app.use(errorHandler);
 
 (async () => {
     await db.sequelize.sync();

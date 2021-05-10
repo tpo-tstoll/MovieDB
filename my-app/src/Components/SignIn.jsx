@@ -1,6 +1,5 @@
 import React, { useContext, useRef } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import Context from '../context';
 import api from '../utils/api'
 
@@ -24,7 +23,7 @@ const SignIn = () => {
             password: encodedPassword
         }); 
 
-        history.goBack();
+        history.push('/');
     }
 
     const onSubmit = e => {

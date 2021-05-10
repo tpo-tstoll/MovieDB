@@ -7,11 +7,11 @@ const ValidationError = () => {
     //returns validation error component
     return (
         <div className="validation--errors">
-            <h3><span style={{background: "white", padding: "4px"}}>Validation Errors</span></h3>
+            <h3><span>Validation Errors</span></h3>
             <ul>
                 {validationError.map(error => {
                     //find a better key?!?!
-                    return <li key={error}><span style={{background: "white", padding: "4px"}}>{error}</span></li>
+                    return <li key={error}><span>{error}</span></li>
                 })}
             </ul>
         </div>

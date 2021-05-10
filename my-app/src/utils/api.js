@@ -36,4 +36,16 @@ export default {
         });
         return response;
     },
+
+    postCreateUser: async ( firstName, lastName, emailAddress, password) => {
+
+        const response = await axios.post(`http://localhost:5000/api/users`, {
+            firstName: firstName,
+            lastName: lastName,
+            emailAddress: emailAddress,
+            password: password
+        });
+        return await response;
+
+    },
 }
