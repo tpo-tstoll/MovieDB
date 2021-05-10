@@ -1712,7 +1712,38 @@ ul.arrow {
  .maintitle {
   text-align: center;
   color: black;
- }
+}
+
+.maintitle:hover{
+  text-shadow: .5px .5px 0 #ffaa3c,
+  -.5px .5px 0 #ffaa3c,
+  .5px -.5px 0 #ffaa3c,
+  -.5px -.5px 0 #ffaa3c,
+  0px .5px 0 #ffaa3c,
+  0px -.5px 0 #ffaa3c,
+  -.5px 0px 0 #ffaa3c,
+  .5px 0px 0 #ffaa3c,
+  1px 1px 0 #ffaa3c,
+  -1px 1px 0 #ffaa3c,
+  1px -1px 0 #ffaa3c,
+  -1px -1px 0 #ffaa3c,
+  0px 1px 0 #ffaa3c,
+  0px -1px 0 #ffaa3c,
+  -1px 0px 0 #ffaa3c,
+  1px 0px 0 #ffaa3c,
+  .5px 1px 0 #ffaa3c,
+  -.5px 1px 0 #ffaa3c,
+  .5px -1px 0 #ffaa3c,
+  -.5px -1px 0 #ffaa3c,
+  1px .5px 0 #ffaa3c,
+  -1px .5px 0 #ffaa3c,
+  1px -.5px 0 #ffaa3c,
+  -1px -.5px 0 #ffaa3c;
+}
+
+.year{
+  color: #000
+}
 
  .col-centered{
   display: flex;
@@ -1726,8 +1757,50 @@ ul.arrow {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px;
-  border: none
+  height: 300px;
+  border: none;
+}
+
+.search-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: none;
+  padding-bottom: 40px;
+}
+
+.search-year {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding-bottom: 0px;
+}
+
+.main-image {
+  display: flex;
+  justify-content: center;
+  align-items: center baseline;
+  height: 500px;
+  border: none;
+}
+
+.main-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding-bottom: 0px;
+}
+
+.main-desc {
+  display: flex;
+  justify-content: center;
+  align-items: center ;
+  border: none;
+  padding-bottom: 0px;
+  padding-top: 0px;
 }
 
 .goBack{

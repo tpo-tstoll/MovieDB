@@ -20,9 +20,7 @@ const Movies = () => {
                         <div className="col-md-12">
 							<h1 className='today'>Popular Titles Today:</h1>
 							<div className="slider">
-								<ul className="slides">
-									<MovieSlider />
-                                </ul>
+								<MovieSlider />
                             </div>
                         </div>
                         <div className="row">
