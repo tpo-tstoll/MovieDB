@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from 'react';
+import React, { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import api from '../utils/api'
 import Context from '../context';
@@ -8,24 +8,6 @@ import 'react-multi-carousel/lib/styles.css';
 const Favorites = () => {
 
     const {value} = useContext(Context);
-
-    useEffect(() => {
-        const favoriteList = [];
-        const getFavoriteList = async () => {
-            let response = await api.getFavorites(value.user.email, value.user.password);
-            for (let i = 0; i < response.data.length; i++) {
-                let favorite = {
-                    listId: response.data[i].id,
-                    movieId: response.data[i].movieId,
-                    title: response.data[i].title,
-                    image: response.data[i].image
-                }
-                favoriteList.push(favorite);
-            }
-            await value.setFavorites(favoriteList);
-        }
-        getFavoriteList();
-    }, [])
 
     const responsive = {
         desktop: {

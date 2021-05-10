@@ -121,6 +121,26 @@ export const ContextProvider = props => {
         image: ''
     }]);
 
+    useEffect(() => {
+        if (value.user.authenticated) {
+        const favoriteList = [];
+        const getFavoriteList = async () => {
+            let response = await api.getFavorites(value.user.email, value.user.password);
+            for (let i = 0; i < response.data.length; i++) {
+                let favorite = {
+                    listId: response.data[i].id,
+                    movieId: response.data[i].movieId,
+                    title: response.data[i].title,
+                    image: response.data[i].image
+                }
+                favoriteList.push(favorite);
+            }
+            await value.setFavorites(favoriteList);
+        }
+        getFavoriteList();
+    }
+    }, [path])
+
     //State that contains details on a specific movie
     const [movieDetail, setMovieDetail] = useState({
         title: '',
