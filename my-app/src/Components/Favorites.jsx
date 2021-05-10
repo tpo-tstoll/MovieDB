@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import api from '../utils/api'
 import Context from '../context';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';

@@ -49,7 +49,7 @@ const SearchResults = () => {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="slider">
-                        <h2 className>Search Results: {value.searchResults.length}</h2>
+                        <h2>Search Results: {value.searchResults.length}</h2>
                             <Carousel responsive={responsive} showDots customDot={<CustomDot />}>
                                 {value.searchResults.map(movie => {
                                    return <ul className="slides">

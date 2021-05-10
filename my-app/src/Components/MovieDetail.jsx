@@ -88,6 +88,7 @@ const MovieDetail = () => {
             }
     }
         getMoviedetail();
+        // eslint-disable-next-line
     }, [])
 
     // eslint-disable-next-line

@@ -100,6 +100,7 @@ export const ContextProvider = props => {
             Cookies.set('pass', value.user.password, {expires: 1});
             Cookies.set('id', value.user.userId, {expires: 1});
         }
+        // eslint-disable-next-line
     }, [user])
 
     useEffect(() => {
@@ -139,6 +140,7 @@ export const ContextProvider = props => {
         }
         getFavoriteList();
     }
+    // eslint-disable-next-line
     }, [path])
 
     //State that contains details on a specific movie
