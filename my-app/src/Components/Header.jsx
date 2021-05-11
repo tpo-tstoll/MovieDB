@@ -36,7 +36,7 @@ const Header = () => {
                     <img src="logo.png" alt="" className="logo"></img>
                     <div className="logo-copy">
                         <h1 className="site-title">The Movie Place</h1>
-                        <small className="site-description">Tommy knows movies</small>
+                        <small className="site-description">We know movies</small>
                     </div>
                 </NavLink>
                 <div>
