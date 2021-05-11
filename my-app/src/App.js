@@ -10,6 +10,8 @@ import SignIn from './Components/SignIn';
 import SignUp from './Components/SignUp'
 import SignOut from './Components/SignOut';
 import Favorites from './Components/Favorites';
+import About from './Components/About';
+import NotFound from './Components/NotFound';
 
 function App() {
 
@@ -22,8 +24,10 @@ function App() {
         <Route exact path='/signup' component={SignUp} />
         <Route exact path='/signout' component={SignOut} />
         <Route exact path='/favorites' component={Favorites} />
+        <Route exact path='/about' component={About} />
         <Route exact path={'/movie/:id'} component={MovieDetail} />
         <Route path='/search/' component={SearchResults} />
+        <Route component={NotFound} />
       </Switch>
       <Footer />
     </>
