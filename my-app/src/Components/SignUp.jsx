@@ -1,5 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import { motion } from "framer-motion";
 import Context from '../context';
 import api from '../utils/api.js';
 import ValidationError from './ValidationError'
@@ -49,6 +50,22 @@ const SignUp = () => {
         value.asyncHandler(createUser);
     }
 
+    
+    const divVariant = {
+        hidden: { x: "100vw", opacity: 0, transition: { staggerChildren: 4 } },
+        show: {
+            x: 0,
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.3,
+                type: "spring",
+                stiffness: 35,
+                ease: "easeOut",
+                duration: 0.25
+            }
+        }
+    };
+
     return (
         <main className="main-content">
             <div className="container">
@@ -56,7 +73,12 @@ const SignUp = () => {
                 {value.movies.slice(0,8).map(movie => {return <img className='tile'src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title} key={movie.id}></img>})}
                     <div className="row">
                         <div className="col-md-4 col-md-offset-4">
-                            <div className="form--centered">
+                            <motion.div
+                                variants={divVariant}
+                                initial="hidden"
+                                animate="show"
+                                className="form--centered"
+                            >  
                                 <h2 id="uc-heading">Sign Up</h2>
                                 {value.validationError ? <ValidationError /> : null}
                                 <form className="signinform" onSubmit={onSubmit}>
@@ -76,7 +98,7 @@ const SignUp = () => {
                                     </div>
                                 </form>
                                 <p className="txt-footer">Already have a user account? <br/>Click here to <NavLink className="signup-link" to='/signin'>sign in!</NavLink></p>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </div>

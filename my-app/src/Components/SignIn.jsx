@@ -1,5 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import { motion } from "framer-motion";
 import Context from '../context';
 import api from '../utils/api'
 
@@ -11,6 +12,21 @@ const SignIn = () => {
 
     const emailInput = useRef('');
     const passwordInput = useRef('');
+    
+    const divVariant = {
+        hidden: { x: "100vw", opacity: 0, transition: { staggerChildren: 4 } },
+        show: {
+            x: 0,
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.3,
+                type: "spring",
+                stiffness: 35,
+                ease: "easeOut",
+                duration: 0.25
+            }
+        }
+    };
 
     //Function to Sign in user and set user state
     const userSignIn = async () => {
@@ -41,7 +57,12 @@ const SignIn = () => {
                 {value.movies.slice(0,8).map(movie => {return <img className='tile'src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title} key={movie.id}></img>})}
                     <div className="row">
                         <div className="col-md-4 col-md-offset-4">
-                            <div className="form--centered">
+                            <motion.div
+                                variants={divVariant}
+                                initial="hidden"
+                                animate="show"
+                                className="form--centered"
+                            >  
                                 <h2>Sign In</h2>
                                 {value.error ? <h3 className="errors" id="error">{value.error}</h3> : null}
                                 <form className="signinform" onSubmit={onSubmit}>
@@ -55,7 +76,7 @@ const SignIn = () => {
                                     </div>
                                 </form>
                                 <p className="txt-footer">Don't have a user account? <br /> Click here to <NavLink className="signup-link" to="/signup">sign up</NavLink>!</p>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
