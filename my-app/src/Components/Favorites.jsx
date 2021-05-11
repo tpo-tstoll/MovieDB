@@ -56,8 +56,8 @@ const Favorites = () => {
                         <h2>Your Favorites: {value.favorites.length}</h2>
                             <Carousel responsive={responsive} showDots customDot={<CustomDot />}>
                                 {value.favorites.map(movie => {
-                                   return <ul className="slides"> <li className='col-md-12 search-col-centered' key={movie.movieId}><NavLink to={`/movie/${movie.movieId}`}><img src={movie.image ? `https://image.tmdb.org/t/p/original${movie.image}` : '/1.jpg'} alt={movie.title}></img></NavLink></li>
-                                   <li className="col-md-12 search-title" key={movie.listId}><NavLink to={`/${movie.movieId}`}><h2 className="maintitle">{movie.title.length > 35 ? `${movie.title.substring(0,35)}...` : movie.title}</h2></NavLink></li></ul>
+                                   return <ul className="slides"> <li className='col-md-12 favorite-col-centered'><NavLink to={`/movie/${movie.movieId}`}><img src={movie.image ? `https://image.tmdb.org/t/p/original${movie.image}` : '/1.jpg'} alt={movie.title}></img></NavLink></li>
+                                   <li className="col-md-12 favorite-title"><NavLink to={`/${movie.movieId}`}><h2 className="maintitle">{movie.title.length > 35 ? `${movie.title.substring(0,35)}...` : movie.title}</h2></NavLink></li></ul>
                                 })}
                             </Carousel>
                         </div>

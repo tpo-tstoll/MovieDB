@@ -84,6 +84,8 @@ export const ContextProvider = props => {
         image: ''
     }])
 
+    const [buttonCount, setButtonCount ] = useState('');
+
     //State for user info
     const [user, setUser] = useState({
         authenticated: false,
@@ -193,6 +195,7 @@ export const ContextProvider = props => {
         movies,
         movieDetail,
         searchResults,
+        buttonCount,
         upcoming,
         user,
         error,
@@ -200,6 +203,7 @@ export const ContextProvider = props => {
         validationError,
         setUpcoming,
         setSearchResults,
+        setButtonCount,
         setMovieDetail,
         setUser,
         asyncHandler,

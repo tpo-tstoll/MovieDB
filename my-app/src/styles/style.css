@@ -1750,14 +1750,29 @@ ul.arrow {
   justify-content: center;
   align-items: center;
   height: 400px;
-  border: none
+  border: none;
 }
 
-.search-col-centered{
+.favorite-col-centered{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 300px;
+  border: none;
+}
+
+.favorite-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: none;
+  padding-bottom: 40px;
+}
+
+.search-col{
+  display: flex;
+  height: 475px;
   border: none;
 }
 
@@ -1767,7 +1782,7 @@ ul.arrow {
   align-items: center;
   text-align: center;
   border: none;
-  padding-bottom: 40px;
+  padding-bottom: 0px;
 }
 
 .search-year {
@@ -1950,4 +1965,33 @@ ul.arrow {
 }
 .validation--errors li:last-child {
   margin-bottom: 0;
+}
+
+.paginationBttns {
+  width: 100%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  font-weight: bold;
+  font-size: larger;
+  margin: 10px;
+  padding: 4px;
+  background-color: #000;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.paginationBttns a:hover {
+  background-color: #ffaa3c;
+  color: white;
+}
+
+.paginationActive a {
+  background-color: #ffaa3c;
+  color: white;
 }

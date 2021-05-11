@@ -15,17 +15,15 @@ const Header = () => {
         e.preventDefault();
         let resultArray = [];
         history.push(`/search/${searchInput.current.value}`)
-        for (let j=1; j <= 6; j++) {
-            let response = await api.getSearchResults(searchInput.current.value, j);
-            for (let i = 0; i < response.data.results.length; i++ ) {
-                let results = {
-                    id: response.data.results[i].id ? response.data.results[i].id : null,
-                    title: response.data.results[i].title ? response.data.results[i].title : null,
-                    year: response.data.results[i].release_date ? response.data.results[i].release_date : null,
-                    image: response.data.results[i].poster_path ? response.data.results[i].poster_path : null
-                }
-                resultArray.push(results)
+        let response = await api.getSearchResults(searchInput.current.value, 1);
+        for (let i = 0; i < response.data.results.length; i++ ) {
+            let results = {
+                id: response.data.results[i].id ? response.data.results[i].id : null,
+                title: response.data.results[i].title ? response.data.results[i].title : null,
+                year: response.data.results[i].release_date ? response.data.results[i].release_date : null,
+                image: response.data.results[i].poster_path ? response.data.results[i].poster_path : null
             }
+            resultArray.push(results)
         }
         value.setSearchResults(resultArray);
         searchInput.current.value = null;

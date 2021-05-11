@@ -1,49 +1,40 @@
-import React, { useContext} from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext, useEffect} from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import Context from '../context';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+import api from '../utils/api';
+import ReactPaginate  from 'react-paginate';
 
 const SearchResults = () => {
 
     const {value} = useContext(Context);
 
-    //Create carousel settings
-    const responsive = {
-        desktop: {
-          breakpoint: { max: 3000, min: 1024 },
-          items: 5,
-          slidesToSlide: 5
+    let path = useLocation().pathname.substring(8);
+
+    //Get page count
+    useEffect( ()=> {
+        const pageCount = async () => {
+            let response = await api.getSearchResults(path, 1);
+            value.setButtonCount(response.data.total_pages);
         }
-      };
+        pageCount();
+    },[path])
 
-    //Array to hold carousel pagination buttons
-    const carouselItems =[]
-    
-    //Create pagination buttons for carousel
-    const addPagination = () => {
-        const numOfButtons = Math.ceil(value.searchResults.length/5);
-            for (let i=1; i <= numOfButtons; i++) {
-                carouselItems.push(i);
-            };
+    //Handle Page Change
+    const changePage = async (e) => {
+        let pageNumber = e.selected +1 ;
+        let resultsArr = [];
+        let response = await api.getSearchResults(path, pageNumber);
+        for(let i = 0; i < response.data.results.length; i++){
+            let movieResults = {
+                id: response.data.results[i].id,
+                title: response.data.results[i].title,
+                year: response.data.results[i].release_date,
+                image: response.data.results[i].poster_path,
+            }
+            resultsArr.push(movieResults)
+        }
+        value.setSearchResults(resultsArr);
     }
-
-    //Adjust carousel setting to use pagination buttons
-    const CustomDot = ({ onClick, ...rest }) => {
-        const {
-            index,
-            active,
-        } = rest;
-        addPagination();
-        return (
-            <button
-            className={`pagination ${active ? "active" : "inactive"}`}
-            onClick={() => onClick()}
-            >
-            {React.Children.toArray(carouselItems)[index]}
-            </button>
-        );
-    };
 
     return (
         <main className="main-content">
@@ -52,16 +43,27 @@ const SearchResults = () => {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="slider">
-                        <h2>Search Results: {value.searchResults.length}</h2>
-                            <Carousel responsive={responsive} showDots customDot={<CustomDot />}>
+                        <h2>Search Results:</h2>
+                            <ul className="slides">
                                 {value.searchResults.map(movie => {
-                                   return <ul className="slides">
-                                   <li className='row col-md-12 search-col-centered' key={movie.id}><NavLink to={`/movie/${movie.id}`}><img src={movie.image ? `https://image.tmdb.org/t/p/original${movie.image}` : '/1.jpg'} alt={movie.title}></img></NavLink></li>
-                                   <li className="col-md-12 search-year"><h4 className="year">Released: {movie.year ? movie.year.substring(0,4) : 'No Year Available'}</h4></li>
-                                   <li className="col-md-12 search-title"><NavLink to={`/${movie.id}`}><h2 className="maintitle">{movie.title.length > 35 ? `${movie.title.substring(0,35)}...` : movie.title}</h2></NavLink></li></ul>
+                                   return <>
+                                   <li className='col-md-3 search-col' key={movie.id}><NavLink to={`/movie/${movie.id}`}><img src={movie.image ? `https://image.tmdb.org/t/p/original${movie.image}` : '/1.jpg'} alt={movie.title}></img>
+                                   <h4 className="search-year">Released: {movie.year ? movie.year.substring(0,4) : 'No Year Available'}</h4>
+                                   <h2 className="maintitle search-title">{movie.title.length > 35 ? `${movie.title.substring(0,35)}...` : movie.title}</h2></NavLink></li></>
                                 })}
-                            </Carousel>
+                            </ul>                            
                         </div>
+                        <ReactPaginate 
+                                PreviousLabel={'Previous'}
+                                nextLabel={'Next'}
+                                pageCount = {value.buttonCount}
+                                onPageChange={changePage}
+                                containerClassName={'paginationBttns'}
+                                previousLinkClassName={'previousBttn'}
+                                nextLinkClassName={'nextBttn'}
+                                disabledClassName={'paginationDisabled'}
+                                activeClassName={'paginationActive'}
+                            /> 
                     </div>
                 </div>
             </div>
