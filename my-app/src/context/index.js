@@ -84,6 +84,7 @@ export const ContextProvider = props => {
         image: ''
     }])
 
+    //State for user info
     const [user, setUser] = useState({
         authenticated: false,
         userName: '',
@@ -92,6 +93,7 @@ export const ContextProvider = props => {
         userId: '',
     });
 
+    //Set cookies to retain user info for 1 day
     useEffect(() => {
         if (user.authenticated) {
             Cookies.set('loggedIn', 'true', {expires: 1})
@@ -103,6 +105,7 @@ export const ContextProvider = props => {
         // eslint-disable-next-line
     }, [user])
 
+    //Log user back in based upon cookies
     useEffect(() => {
         if (Cookies.get('loggedIn') === 'true') {
             setUser({
@@ -115,6 +118,7 @@ export const ContextProvider = props => {
         }
     }, [])
 
+    //State to hold favorite movies
     const [favorites, setFavorites] = useState([{
         listId: '',
         movieId: '',
@@ -122,6 +126,7 @@ export const ContextProvider = props => {
         image: ''
     }]);
 
+    //Get favorite movies from database
     useEffect(() => {
         if (value.user.authenticated) {
         const favoriteList = [];
@@ -156,6 +161,7 @@ export const ContextProvider = props => {
         reviews: []
     });
 
+    //State to handle various types of errors based upon status
     const [error, setError] = useState([]);
     const [validationError, setValidationError] = useState(null);
     const asyncHandler = async cb => {
@@ -182,9 +188,6 @@ export const ContextProvider = props => {
         setError(null);
         setValidationError(null);
     }, [path])
-
-
-
 
     const value = {
         movies,

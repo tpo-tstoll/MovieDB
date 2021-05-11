@@ -5,13 +5,14 @@ import api from '../utils/api'
 
 const SignIn = () => {
 
-    const history = useHistory();
-
     const { value } = useContext(Context);
+
+    const history = useHistory();
 
     const emailInput = useRef('');
     const passwordInput = useRef('');
 
+    //Function to Sign in user and set user state
     const userSignIn = async () => {
         const encodedPassword = btoa(passwordInput.current.value)
         const response = await api.getUser(emailInput.current.value, encodedPassword);
@@ -27,6 +28,7 @@ const SignIn = () => {
         history.push('/');
     }
 
+    //Submit fuction to execute sign in function
     const onSubmit = e => {
         e.preventDefault();
         value.asyncHandler(userSignIn);
@@ -36,7 +38,7 @@ const SignIn = () => {
         <main className="main-content">
             <div className="container">
             <div className="page">
-                {value.movies.slice(0,8).map(movie => {return <img className='tile'src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title}></img>})}
+                {value.movies.slice(0,8).map(movie => {return <img className='tile'src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title} key={movie.id}></img>})}
                     <div className="row">
                         <div className="col-md-4 col-md-offset-4">
                             <div className="form--centered">

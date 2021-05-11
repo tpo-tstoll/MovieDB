@@ -1,3 +1,4 @@
+'use strict'
 exports.asyncHandler = (cb) => {
     return async (req, res, next) => {
       try {

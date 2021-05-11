@@ -4,7 +4,7 @@ const { asyncHandler } = require('../../middleware/asyncHandler');
 const { authenticateUser } = require('../../middleware/authUser');
 const { User } = require('../../models');
 
-// Get User
+// Route to sign in an auth'd user
 router.get('/users', authenticateUser, asyncHandler((req, res) => {
     const user = req.currentUser;
   
@@ -15,7 +15,7 @@ router.get('/users', authenticateUser, asyncHandler((req, res) => {
     });
 }));
 
-// Post route to create a new user
+// Route to create a new user
 router.post('/users', asyncHandler(async (req, res, next) => {
     try {
       const user = req.body;

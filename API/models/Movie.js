@@ -7,7 +7,6 @@ module.exports = (sequelize) => {
     Movie.init({
         movieId: {
             type: DataTypes.INTEGER,
-            unique: true,
             allowNull: false,
             validate: {
                 notNull: {

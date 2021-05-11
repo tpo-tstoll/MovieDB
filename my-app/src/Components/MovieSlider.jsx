@@ -8,8 +8,9 @@ import 'react-multi-carousel/lib/styles.css';
 
 const MovieSlider = () => {
 
-	const {value} = useContext(Context);
-
+    const {value} = useContext(Context);
+    
+    //Create carousel settings
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },

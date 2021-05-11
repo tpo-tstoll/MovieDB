@@ -4,6 +4,7 @@ const { asyncHandler } = require('../../middleware/asyncHandler');
 const { authenticateUser } = require('../../middleware/authUser');
 const { Movie } = require('../../models');
 
+//Route to get all of a users favorited movies
 router.get('/movies', authenticateUser, asyncHandler(async (req, res) => {
     const currentUserId = req.currentUser.id;
     const movies = await Movie.findAll({
@@ -17,6 +18,7 @@ router.get('/movies', authenticateUser, asyncHandler(async (req, res) => {
     res.json(movies);
   }));
 
+  //Route to add a movie to a users favorite list
   router.post('/movies', authenticateUser, asyncHandler(async (req, res, next) => {
     try {
       const movie = await Movie.create(req.body);
@@ -34,6 +36,7 @@ router.get('/movies', authenticateUser, asyncHandler(async (req, res) => {
   }
   }));
 
+  //Route to remove a users favorited movie
   router.delete('/movies/:id', authenticateUser, asyncHandler( async(req, res) => {
     const userId = req.currentUser.id;
     const movie = await Movie.findOne({

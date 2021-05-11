@@ -16,6 +16,7 @@ const SignUp = () => {
     const passwordInput = useRef('');
     const confirmPasswordInput = useRef('');
 
+    //Function to create new user, sign in, and set state
     const createUser = async () => {
         const encodedPassword = btoa(passwordInput.current.value);
         await api.postCreateUser(firstNameInput.current.value, lastNameInput.current.value, emailInput.current.value, passwordInput.current.value);
@@ -31,26 +32,28 @@ const SignUp = () => {
         }); 
 
         history.push('/');
-        }
+    }
 
-        const validatePassword = () => {
-            if (passwordInput.current.value === confirmPasswordInput.current.value) {
-                confirmPasswordInput.current.setCustomValidity('');
-            } else {
-                confirmPasswordInput.current.setCustomValidity("Passwords do not match");
-            }
+    //Validate password and confirm password inputs
+    const validatePassword = () => {
+        if (passwordInput.current.value === confirmPasswordInput.current.value) {
+            confirmPasswordInput.current.setCustomValidity('');
+        } else {
+            confirmPasswordInput.current.setCustomValidity("Passwords do not match");
         }
+    }
 
-        const onSubmit = async (e) => {
-            e.preventDefault();
-            value.asyncHandler(createUser);
-        }
+    //Execute sign up function
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        value.asyncHandler(createUser);
+    }
 
     return (
         <main className="main-content">
             <div className="container">
                 <div className="page">
-                {value.movies.slice(0,8).map(movie => {return <img className='tile'src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title}></img>})}
+                {value.movies.slice(0,8).map(movie => {return <img className='tile'src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={movie.title} key={movie.id}></img>})}
                     <div className="row">
                         <div className="col-md-4 col-md-offset-4">
                             <div className="form--centered">

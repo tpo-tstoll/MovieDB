@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Context from '../context';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -8,6 +8,7 @@ const Favorites = () => {
 
     const {value} = useContext(Context);
 
+    //Create carousel settings
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
@@ -15,17 +16,20 @@ const Favorites = () => {
           slidesToSlide: 5
         }
       };
+    
+    //Array to hold carousel pagination buttons
+    const carouselItems =[]
 
-      const carouselItems =[]
-
-      const addPagination = () => {
+    //Create pagination buttons for carousel
+    const addPagination = () => {
         const numOfButtons = Math.ceil(value.favorites.length/5);
-      
+        
         for (let i=1; i <= numOfButtons; i++) {
             carouselItems.push(i);
         };
-      }
+    }
 
+    //Adjust carousel setting to use pagination buttons
     const CustomDot = ({ onClick, ...rest }) => {
         const {
             index,
@@ -53,7 +57,7 @@ const Favorites = () => {
                             <Carousel responsive={responsive} showDots customDot={<CustomDot />}>
                                 {value.favorites.map(movie => {
                                    return <ul className="slides"> <li className='col-md-12 search-col-centered' key={movie.movieId}><NavLink to={`/movie/${movie.movieId}`}><img src={movie.image ? `https://image.tmdb.org/t/p/original${movie.image}` : '/1.jpg'} alt={movie.title}></img></NavLink></li>
-                                   <li className="col-md-12 search-title"><NavLink to={`/${movie.movieId}`}><h2 className="maintitle">{movie.title.length > 35 ? `${movie.title.substring(0,35)}...` : movie.title}</h2></NavLink></li></ul>
+                                   <li className="col-md-12 search-title" key={movie.listId}><NavLink to={`/${movie.movieId}`}><h2 className="maintitle">{movie.title.length > 35 ? `${movie.title.substring(0,35)}...` : movie.title}</h2></NavLink></li></ul>
                                 })}
                             </Carousel>
                         </div>

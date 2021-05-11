@@ -8,7 +8,7 @@ const Movies = () => {
 
 	const {value} = useContext(Context);
 	
-	//Get current date and set options to dynamically update premier headers in return
+	//Get current date and create month array
 	let d = new Date();
 	const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 

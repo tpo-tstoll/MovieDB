@@ -8,6 +8,7 @@ const SearchResults = () => {
 
     const {value} = useContext(Context);
 
+    //Create carousel settings
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
@@ -16,16 +17,18 @@ const SearchResults = () => {
         }
       };
 
-      const carouselItems =[]
-
-      const addPagination = () => {
+    //Array to hold carousel pagination buttons
+    const carouselItems =[]
+    
+    //Create pagination buttons for carousel
+    const addPagination = () => {
         const numOfButtons = Math.ceil(value.searchResults.length/5);
-      
-        for (let i=1; i <= numOfButtons; i++) {
-            carouselItems.push(i);
-        };
-      }
+            for (let i=1; i <= numOfButtons; i++) {
+                carouselItems.push(i);
+            };
+    }
 
+    //Adjust carousel setting to use pagination buttons
     const CustomDot = ({ onClick, ...rest }) => {
         const {
             index,

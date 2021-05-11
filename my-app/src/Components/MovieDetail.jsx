@@ -17,6 +17,7 @@ const MovieDetail = () => {
         history.goBack();
     }
 
+    //Add movie to favorite list if signed in
     const addFavorite = async () => {
         const favorite = {
             "movieId": path,
@@ -26,12 +27,12 @@ const MovieDetail = () => {
         }
         try {
             let response = await api.postFavorite(value.user.email, value.user.password, favorite);
-            return response;
         } catch(error) {
             console.log(error)
         }
     }
 
+    //Remove movie from favorite list if signed in
     const removeFavorite = async () => {
         try {
             let response = await api.removeFavorite(value.user.email, value.user.password, path);
@@ -103,7 +104,6 @@ const MovieDetail = () => {
                         <NavLink to='/'>Home</NavLink>
                         <span> {value.movieDetail.title}</span>
                         <button onClick={goBack} className="goBack">Go Back</button>
-                        
                     </div>
                     <div className="content">
                         <div className="row">
@@ -116,37 +116,34 @@ const MovieDetail = () => {
                                     <p>{value.movieDetail.overview}</p>
                                 </div>
                                 <ul className="movie-meta">
-                                    <li><strong>Rating:</strong> 
-                                        {value.movieDetail.rating ? <span className="starring"><strong> {value.movieDetail.rating}</strong> out of 10</span> 
-                                        : 
-                                        <span className="starring"> Sorry! No Ratings Yet</span>
-                                        
+                                    <li><strong>Rating:</strong>
+                                        {value.movieDetail.rating ? <span className="starring"><strong> {value.movieDetail.rating}</strong> out of 10</span>
+                                            :
+                                            <span className="starring"> Sorry! No Ratings Yet</span>
+
                                         }
                                     </li>
                                     <li><strong>Length:</strong> {value.movieDetail.runningTime}</li>
                                 </ul>
                                 <ul className="starring">
                                     <li key={value.movieDetail.director}><strong>Director:</strong> {value.movieDetail.director ? value.movieDetail.director : "Sorry no director was located for this film"} </li>
-                                    <li key={path}><strong>Stars:</strong> {value.movieDetail.actors.length > 0 ? value.movieDetail.actors.map(actor => { return <>{actor} | </>}) : "Sorry no actors were located for this film"} </li>
+                                    <li key={path}><strong>Stars:</strong> {value.movieDetail.actors.length > 0 ? value.movieDetail.actors.map(actor => { return <span key={actor}>{actor} | </span> }) : "Sorry no actors were located for this film"} </li>
                                 </ul>
-                                    {value.favorites.filter(movie => movie.title === value.movieDetail.title).length === 0 && value.user.authenticated ?
-                                        <NavLink to={`/movie/${path}/`}><button onClick={addFavorite} className="buttons">Add to Your Favorites</button></NavLink> : null}
-                                    {value.favorites.filter(movie => movie.title === value.movieDetail.title).length > 0 && value.user.authenticated ? 
-                                        <button onClick={removeFavorite} className="buttons">Remove From Favorites</button> : null}
-                                
-                                    
-                                                               
+                                {value.favorites.filter(movie => movie.title === value.movieDetail.title).length === 0 && value.user.authenticated ?
+                                    <NavLink to={`/movie/${path}/`}><button onClick={addFavorite} className="buttons">Add to Your Favorites</button></NavLink> : null}
+                                {value.favorites.filter(movie => movie.title === value.movieDetail.title).length > 0 && value.user.authenticated ?
+                                    <button onClick={removeFavorite} className="buttons">Remove From Favorites</button> : null}
                                 <hr />
                                 <div className="entry-content">
                                     <h3>Reviews:</h3>
-                                    {value.movieDetail.reviews.length > 0 ? 
+                                    {value.movieDetail.reviews.length > 0 ?
                                         value.movieDetail.reviews.map(review => {
                                             return <><p key={review}>- {review}</p></>
                                         })
                                         :
                                         <h3>Sorry No Reviews Exist For This Film!</h3>
-                                        }
-							    </div>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

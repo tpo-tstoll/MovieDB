@@ -13,7 +13,6 @@ import Favorites from './Components/Favorites';
 
 function App() {
 
-  
   return (
     <>
       <Header />
